@@ -1,7 +1,6 @@
 package main;
 
-import pattern.PurchaseOrder;
-
+import static pattern.PatternImplementation.*;
 public class Main {
     public static void main(String[] args) {
         PurchaseOrder order = PurchaseOrder.builder("cliente-42")

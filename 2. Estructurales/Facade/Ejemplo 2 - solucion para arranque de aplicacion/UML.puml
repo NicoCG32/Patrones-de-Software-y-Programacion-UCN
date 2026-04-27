@@ -1,24 +1,47 @@
 @startuml
 title Facade - Ejemplo 2 - solucion para arranque de aplicacion
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.ApplicationFacade" as pattern_ApplicationFacade {
-  +start(): void
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.ConfigurationLoader" as pattern_ConfigurationLoader {
-  +load(): void
+
+package "pattern" #ECFDF5 {
+  class ApplicationFacade {
+    +start(): void
+  }
+  class ConfigurationLoader {
+    +load(): void
+  }
+  class Database {
+    +connect(): void
+  }
+  class Logger {
+    +start(): void
+  }
 }
-class "pattern.Database" as pattern_Database {
-  +connect(): void
-}
-class "pattern.Logger" as pattern_Logger {
-  +start(): void
-}
-main_Main ..> pattern_ApplicationFacade : instancia
-pattern_ApplicationFacade ..> pattern_ConfigurationLoader : instancia
-pattern_ApplicationFacade ..> pattern_Database : instancia
-pattern_ApplicationFacade ..> pattern_Logger : instancia
+
+ApplicationFacade ..> Database : crea
+ApplicationFacade ..> ConfigurationLoader : crea
+ApplicationFacade ..> Logger : crea
+ConfigurationLoader ..> Database : crea
+ConfigurationLoader ..> Logger : crea
+Logger ..> Database : crea
+Main ..> ApplicationFacade : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

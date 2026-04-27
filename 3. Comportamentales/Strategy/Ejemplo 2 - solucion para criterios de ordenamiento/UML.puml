@@ -1,37 +1,46 @@
 @startuml
 title Strategy - Ejemplo 2 - solucion para criterios de ordenamiento
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.PriceSortStrategy" as pattern_PriceSortStrategy {
-  +sort(List<Product> products): void
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.Product" as pattern_Product {
-  +Product(String name, double price, int relevance)
-  +toString(): String
+
+package "pattern" #ECFDF5 {
+  class PriceSortStrategy {
+    +sort(List<Product> products): void
+  }
+  class Product {
+    +toString(): String
+  }
+  class ProductCatalog {
+    +setStrategy(SortStrategy strategy): void
+    +show(List<Product> products): void
+  }
+  class RelevanceSortStrategy {
+    +sort(List<Product> products): void
+  }
+  interface SortStrategy <<interfaz>> {
+  }
 }
-class "pattern.ProductCatalog" as pattern_ProductCatalog {
-  +ProductCatalog(SortStrategy strategy)
-  +setStrategy(SortStrategy strategy): void
-  +show(List<Product> products): void
-}
-class "pattern.RelevanceSortStrategy" as pattern_RelevanceSortStrategy {
-  +sort(List<Product> products): void
-}
-interface "pattern.SortStrategy" as pattern_SortStrategy {
-}
-pattern_SortStrategy <|.. pattern_PriceSortStrategy
-pattern_SortStrategy <|.. pattern_RelevanceSortStrategy
-main_Main ..> pattern_PriceSortStrategy : instancia
-main_Main ..> pattern_Product : instancia
-main_Main ..> pattern_ProductCatalog : instancia
-pattern_PriceSortStrategy --> pattern_Product : usa
-pattern_PriceSortStrategy --> pattern_SortStrategy : usa
-pattern_ProductCatalog --> pattern_Product : usa
-pattern_ProductCatalog --> pattern_SortStrategy : usa
-pattern_RelevanceSortStrategy --> pattern_Product : usa
-pattern_RelevanceSortStrategy --> pattern_SortStrategy : usa
-pattern_SortStrategy --> pattern_Product : usa
+
+SortStrategy <|.. PriceSortStrategy
+SortStrategy <|.. RelevanceSortStrategy
+Main ..> PriceSortStrategy : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

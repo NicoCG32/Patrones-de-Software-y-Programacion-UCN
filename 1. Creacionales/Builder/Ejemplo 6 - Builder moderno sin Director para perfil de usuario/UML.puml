@@ -1,28 +1,42 @@
 @startuml
-title Builder moderno - perfil de usuario
-class "main.Main" as Main
-class "pattern.UserProfile" as Profile {
-  -username: String
-  -displayName: String
-  -locale: String
-  -twoFactorEnabled: boolean
-  -newsletterEnabled: boolean
-  +builder(username: String): Builder
-  +describe(): String
+title Builder - Ejemplo 6 - Builder moderno sin Director para perfil de usuario
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.UserProfile.Builder" as Builder {
-  -username: String
-  -displayName: String
-  -locale: String
-  -twoFactorEnabled: boolean
-  -newsletterEnabled: boolean
-  +displayName(value: String): Builder
-  +locale(value: String): Builder
-  +enableTwoFactor(): Builder
-  +disableNewsletter(): Builder
-  +build(): UserProfile
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-Main ..> Profile
-Profile *-- Builder
-Builder ..> Profile : construye instancia inmutable
+
+package "pattern" #ECFDF5 {
+  class UserProfile {
+    +describe(): String
+    +builder(String username): Builder
+  }
+  class Builder {
+    +displayName(String displayName): Builder
+    +locale(String locale): Builder
+    +enableTwoFactor(): Builder
+    +disableNewsletter(): Builder
+    +build(): UserProfile
+  }
+}
+
+UserProfile ..> Builder : crea
+Builder ..> UserProfile : crea
+Main ..> UserProfile : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

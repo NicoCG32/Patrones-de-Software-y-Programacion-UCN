@@ -1,34 +1,49 @@
 @startuml
 title Builder - Ejemplo 1 - Implementacion Generica
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-interface "pattern.Builder" as pattern_Builder {
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.ConcreteBuilder" as pattern_ConcreteBuilder {
-  +buildHeader(): void
-  +buildBody(): void
-  +buildFooter(): void
-  +result(): Product
+
+package "pattern" #ECFDF5 {
+  interface Builder <<interfaz>> {
+  }
+  class ConcreteBuilder {
+    +buildHeader(): void
+    +buildBody(): void
+    +buildFooter(): void
+    +result(): Product
+  }
+  class Director {
+    +construct(Builder builder): Product
+  }
+  class Product {
+    +setHeader(String header): void
+    +setBody(String body): void
+    +setFooter(String footer): void
+    +toString(): String
+  }
 }
-class "pattern.Director" as pattern_Director {
-  +construct(Builder builder): Product
-}
-class "pattern.Product" as pattern_Product {
-  +setHeader(String header): void
-  +setBody(String body): void
-  +setFooter(String footer): void
-  +toString(): String
-}
-pattern_Builder <|.. pattern_ConcreteBuilder
-main_Main ..> pattern_ConcreteBuilder : instancia
-main_Main ..> pattern_Director : instancia
-main_Main --> pattern_Product : usa
-pattern_Builder --> pattern_Product : usa
-pattern_ConcreteBuilder --> pattern_Builder : usa
-pattern_ConcreteBuilder ..> pattern_Product : instancia
-pattern_Director --> pattern_Builder : usa
-pattern_Director --> pattern_Product : usa
+
+Builder <|.. ConcreteBuilder
+Builder ..> Product : crea
+ConcreteBuilder ..> Product : crea
+Main ..> ConcreteBuilder : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

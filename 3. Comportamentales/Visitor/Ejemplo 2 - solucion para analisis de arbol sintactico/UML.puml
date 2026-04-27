@@ -1,44 +1,49 @@
 @startuml
 title Visitor - Ejemplo 2 - solucion para analisis de arbol sintactico
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.AddNode" as pattern_AddNode {
-  +AddNode(AstNode left, AstNode right)
-  +left(): AstNode
-  +right(): AstNode
-  +accept(AstVisitor visitor): void
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-interface "pattern.AstNode" as pattern_AstNode {
+
+package "pattern" #ECFDF5 {
+  class AddNode {
+    +left(): AstNode
+    +right(): AstNode
+    +accept(AstVisitor visitor): void
+  }
+  interface AstNode <<interfaz>> {
+  }
+  interface AstVisitor <<interfaz>> {
+  }
+  class NumberNode {
+    +value(): int
+    +accept(AstVisitor visitor): void
+  }
+  class PrintVisitor {
+    +visit(NumberNode node): void
+    +visit(AddNode node): void
+  }
 }
-interface "pattern.AstVisitor" as pattern_AstVisitor {
-}
-class "pattern.NumberNode" as pattern_NumberNode {
-  +NumberNode(int value)
-  +value(): int
-  +accept(AstVisitor visitor): void
-}
-class "pattern.PrintVisitor" as pattern_PrintVisitor {
-  +visit(NumberNode node): void
-  +visit(AddNode node): void
-}
-pattern_AstNode <|.. pattern_AddNode
-pattern_AstNode <|.. pattern_NumberNode
-pattern_AstVisitor <|.. pattern_PrintVisitor
-main_Main ..> pattern_AddNode : instancia
-main_Main --> pattern_AstNode : usa
-main_Main ..> pattern_NumberNode : instancia
-main_Main ..> pattern_PrintVisitor : instancia
-pattern_AddNode --> pattern_AstNode : usa
-pattern_AddNode --> pattern_AstVisitor : usa
-pattern_AstNode --> pattern_AstVisitor : usa
-pattern_AstVisitor --> pattern_AddNode : usa
-pattern_AstVisitor --> pattern_NumberNode : usa
-pattern_NumberNode --> pattern_AstNode : usa
-pattern_NumberNode --> pattern_AstVisitor : usa
-pattern_PrintVisitor --> pattern_AddNode : usa
-pattern_PrintVisitor --> pattern_AstVisitor : usa
-pattern_PrintVisitor --> pattern_NumberNode : usa
+
+AstNode <|.. AddNode
+AstNode <|.. NumberNode
+AstVisitor <|.. PrintVisitor
+Main ..> AddNode : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

@@ -1,23 +1,41 @@
 @startuml
 title Proxy - Ejemplo 3 - solucion para documentos protegidos
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-interface "pattern.Document" as pattern_Document {
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.ProtectedDocumentProxy" as pattern_ProtectedDocumentProxy {
-  +open(String userRole): void
+
+package "pattern" #ECFDF5 {
+  interface Document <<interfaz>> {
+  }
+  class ProtectedDocumentProxy {
+    +open(String userRole): void
+  }
+  class SecureDocument {
+    +open(String userRole): void
+  }
 }
-class "pattern.SecureDocument" as pattern_SecureDocument {
-  +open(String userRole): void
-}
-pattern_Document <|.. pattern_ProtectedDocumentProxy
-pattern_Document <|.. pattern_SecureDocument
-main_Main --> pattern_Document : usa
-main_Main ..> pattern_ProtectedDocumentProxy : instancia
-pattern_ProtectedDocumentProxy --> pattern_Document : usa
-pattern_ProtectedDocumentProxy ..> pattern_SecureDocument : instancia
-pattern_SecureDocument --> pattern_Document : usa
+
+Document <|.. ProtectedDocumentProxy
+Document <|.. SecureDocument
+Document ..> SecureDocument : crea
+ProtectedDocumentProxy ..> SecureDocument : crea
+Main ..> ProtectedDocumentProxy : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

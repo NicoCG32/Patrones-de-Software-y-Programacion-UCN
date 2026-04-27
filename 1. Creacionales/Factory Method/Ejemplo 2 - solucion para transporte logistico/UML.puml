@@ -1,38 +1,55 @@
 @startuml
 title Factory Method - Ejemplo 2 - solucion para transporte logistico
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-abstract class "pattern.Logistics" as pattern_Logistics {
-  +planDelivery(String packageId): void
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.RoadLogistics" as pattern_RoadLogistics {
+
+package "pattern" #ECFDF5 {
+  abstract class Logistics {
+  }
+  class RoadLogistics {
+  }
+  class SeaLogistics {
+  }
+  class Ship {
+    +deliver(String packageId): void
+  }
+  interface Transport <<interfaz>> {
+  }
+  class Truck {
+    +deliver(String packageId): void
+  }
 }
-class "pattern.SeaLogistics" as pattern_SeaLogistics {
-}
-class "pattern.Ship" as pattern_Ship {
-  +deliver(String packageId): void
-}
-interface "pattern.Transport" as pattern_Transport {
-}
-class "pattern.Truck" as pattern_Truck {
-  +deliver(String packageId): void
-}
-pattern_Logistics <|-- pattern_RoadLogistics
-pattern_Logistics <|-- pattern_SeaLogistics
-pattern_Transport <|.. pattern_Ship
-pattern_Transport <|.. pattern_Truck
-main_Main --> pattern_Logistics : usa
-main_Main ..> pattern_RoadLogistics : instancia
-pattern_Logistics --> pattern_Transport : usa
-pattern_RoadLogistics --> pattern_Logistics : usa
-pattern_RoadLogistics --> pattern_Transport : usa
-pattern_RoadLogistics ..> pattern_Truck : instancia
-pattern_SeaLogistics --> pattern_Logistics : usa
-pattern_SeaLogistics ..> pattern_Ship : instancia
-pattern_SeaLogistics --> pattern_Transport : usa
-pattern_Ship --> pattern_Transport : usa
-pattern_Truck --> pattern_Transport : usa
+
+Logistics <|-- RoadLogistics
+Logistics <|-- SeaLogistics
+Transport <|.. Ship
+Transport <|.. Truck
+Logistics ..> Truck : crea
+Logistics ..> Ship : crea
+RoadLogistics ..> Truck : crea
+RoadLogistics ..> Ship : crea
+SeaLogistics ..> Ship : crea
+Transport ..> Truck : crea
+Transport ..> Ship : crea
+Truck ..> Ship : crea
+Main ..> Logistics : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

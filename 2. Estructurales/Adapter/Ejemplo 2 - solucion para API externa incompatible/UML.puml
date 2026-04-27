@@ -1,29 +1,44 @@
 @startuml
 title Adapter - Ejemplo 2 - solucion para API externa incompatible
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.CrmCustomerAdapter" as pattern_CrmCustomerAdapter {
-  +CrmCustomerAdapter(ExternalCrmApi api)
-  +findCustomer(String id): Customer
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.Customer" as pattern_Customer {
-  +Customer(String id, String name)
-  +toString(): String
+
+package "pattern" #ECFDF5 {
+  class CrmCustomerAdapter {
+    +findCustomer(String id): Customer
+  }
+  class Customer {
+    +toString(): String
+  }
+  interface CustomerProvider <<interfaz>> {
+  }
+  class ExternalCrmApi {
+    +getCustomerXml(String id): String
+  }
 }
-interface "pattern.CustomerProvider" as pattern_CustomerProvider {
-}
-class "pattern.ExternalCrmApi" as pattern_ExternalCrmApi {
-  +getCustomerXml(String id): String
-}
-pattern_CustomerProvider <|.. pattern_CrmCustomerAdapter
-main_Main ..> pattern_CrmCustomerAdapter : instancia
-main_Main --> pattern_CustomerProvider : usa
-main_Main ..> pattern_ExternalCrmApi : instancia
-pattern_CrmCustomerAdapter ..> pattern_Customer : instancia
-pattern_CrmCustomerAdapter --> pattern_CustomerProvider : usa
-pattern_CrmCustomerAdapter --> pattern_ExternalCrmApi : usa
-pattern_CustomerProvider --> pattern_Customer : usa
+
+CustomerProvider <|.. CrmCustomerAdapter
+CrmCustomerAdapter ..> Customer : crea
+CustomerProvider ..> Customer : crea
+ExternalCrmApi ..> Customer : crea
+Main ..> CrmCustomerAdapter : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

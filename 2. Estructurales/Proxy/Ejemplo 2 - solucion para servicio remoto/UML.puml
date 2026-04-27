@@ -1,23 +1,41 @@
 @startuml
 title Proxy - Ejemplo 2 - solucion para servicio remoto
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.CachingReportProxy" as pattern_CachingReportProxy {
-  +fetchReport(String id): String
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.RemoteReportService" as pattern_RemoteReportService {
-  +fetchReport(String id): String
+
+package "pattern" #ECFDF5 {
+  class CachingReportProxy {
+    +fetchReport(String id): String
+  }
+  class RemoteReportService {
+    +fetchReport(String id): String
+  }
+  interface ReportService <<interfaz>> {
+  }
 }
-interface "pattern.ReportService" as pattern_ReportService {
-}
-pattern_ReportService <|.. pattern_CachingReportProxy
-pattern_ReportService <|.. pattern_RemoteReportService
-main_Main ..> pattern_CachingReportProxy : instancia
-main_Main --> pattern_ReportService : usa
-pattern_CachingReportProxy ..> pattern_RemoteReportService : instancia
-pattern_CachingReportProxy --> pattern_ReportService : usa
-pattern_RemoteReportService --> pattern_ReportService : usa
+
+ReportService <|.. CachingReportProxy
+ReportService <|.. RemoteReportService
+CachingReportProxy ..> RemoteReportService : crea
+ReportService ..> RemoteReportService : crea
+Main ..> CachingReportProxy : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

@@ -1,7 +1,6 @@
 package main;
 
-import pattern.HttpClientConfig;
-
+import static pattern.PatternImplementation.*;
 public class Main {
     public static void main(String[] args) {
         HttpClientConfig config = HttpClientConfig.builder("https://api.example.com")

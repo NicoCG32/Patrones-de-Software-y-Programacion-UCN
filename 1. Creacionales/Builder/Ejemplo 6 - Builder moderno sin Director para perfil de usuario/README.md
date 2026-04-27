@@ -21,7 +21,7 @@ Esto simplifica el diseno cuando la secuencia no necesita estar encapsulada como
 ## Organizacion del proyecto
 
 - `src/main`: contiene el punto de entrada del sistema.
-- `src/pattern`: contiene el producto y su builder fluido.
+- `src/pattern/PatternImplementation.java`: contiene el producto y su builder fluido en un solo archivo.
 
 ## Ejecutar
 

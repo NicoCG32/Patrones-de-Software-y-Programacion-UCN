@@ -1,37 +1,46 @@
 @startuml
 title Decorator - Ejemplo 1 - Implementacion Generica
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.BaseComponent" as pattern_BaseComponent {
-  +operation(): String
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-interface "pattern.Component" as pattern_Component {
+
+package "pattern" #ECFDF5 {
+  class BaseComponent {
+    +operation(): String
+  }
+  interface Component <<interfaz>> {
+  }
+  abstract class Decorator {
+  }
+  class FirstResponsibility {
+    +operation(): String
+  }
+  class SecondResponsibility {
+    +operation(): String
+  }
 }
-abstract class "pattern.Decorator" as pattern_Decorator {
-}
-class "pattern.FirstResponsibility" as pattern_FirstResponsibility {
-  +FirstResponsibility(Component wrapped)
-  +operation(): String
-}
-class "pattern.SecondResponsibility" as pattern_SecondResponsibility {
-  +SecondResponsibility(Component wrapped)
-  +operation(): String
-}
-pattern_Component <|.. pattern_BaseComponent
-pattern_Component <|.. pattern_Decorator
-pattern_Decorator <|-- pattern_FirstResponsibility
-pattern_Decorator <|-- pattern_SecondResponsibility
-main_Main ..> pattern_BaseComponent : instancia
-main_Main --> pattern_Component : usa
-main_Main ..> pattern_FirstResponsibility : instancia
-main_Main ..> pattern_SecondResponsibility : instancia
-pattern_BaseComponent --> pattern_Component : usa
-pattern_Decorator --> pattern_Component : usa
-pattern_FirstResponsibility --> pattern_Component : usa
-pattern_FirstResponsibility --> pattern_Decorator : usa
-pattern_SecondResponsibility --> pattern_Component : usa
-pattern_SecondResponsibility --> pattern_Decorator : usa
+
+Component <|.. BaseComponent
+Component <|.. Decorator
+Decorator <|-- FirstResponsibility
+Decorator <|-- SecondResponsibility
+Main ..> BaseComponent : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

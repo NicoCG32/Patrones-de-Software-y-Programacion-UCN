@@ -1,38 +1,46 @@
 @startuml
 title Decorator - Ejemplo 3 - solucion para calculo de precios
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.BasePrice" as pattern_BasePrice {
-  +BasePrice(double value)
-  +amount(): double
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-interface "pattern.Price" as pattern_Price {
+
+package "pattern" #ECFDF5 {
+  class BasePrice {
+    +amount(): double
+  }
+  interface Price <<interfaz>> {
+  }
+  abstract class PriceDecorator {
+  }
+  class ShippingPrice {
+    +amount(): double
+  }
+  class TaxPrice {
+    +amount(): double
+  }
 }
-abstract class "pattern.PriceDecorator" as pattern_PriceDecorator {
-}
-class "pattern.ShippingPrice" as pattern_ShippingPrice {
-  +ShippingPrice(Price wrapped)
-  +amount(): double
-}
-class "pattern.TaxPrice" as pattern_TaxPrice {
-  +TaxPrice(Price wrapped)
-  +amount(): double
-}
-pattern_Price <|.. pattern_BasePrice
-pattern_Price <|.. pattern_PriceDecorator
-pattern_PriceDecorator <|-- pattern_ShippingPrice
-pattern_PriceDecorator <|-- pattern_TaxPrice
-main_Main ..> pattern_BasePrice : instancia
-main_Main --> pattern_Price : usa
-main_Main ..> pattern_ShippingPrice : instancia
-main_Main ..> pattern_TaxPrice : instancia
-pattern_BasePrice --> pattern_Price : usa
-pattern_PriceDecorator --> pattern_Price : usa
-pattern_ShippingPrice --> pattern_Price : usa
-pattern_ShippingPrice --> pattern_PriceDecorator : usa
-pattern_TaxPrice --> pattern_Price : usa
-pattern_TaxPrice --> pattern_PriceDecorator : usa
+
+Price <|.. BasePrice
+Price <|.. PriceDecorator
+PriceDecorator <|-- ShippingPrice
+PriceDecorator <|-- TaxPrice
+Main ..> BasePrice : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

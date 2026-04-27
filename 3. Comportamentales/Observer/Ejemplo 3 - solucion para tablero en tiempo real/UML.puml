@@ -1,28 +1,43 @@
 @startuml
 title Observer - Ejemplo 3 - solucion para tablero en tiempo real
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.ChartWidget" as pattern_ChartWidget {
-  +update(int activeUsers): void
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.CounterWidget" as pattern_CounterWidget {
-  +update(int activeUsers): void
+
+package "pattern" #ECFDF5 {
+  class ChartWidget {
+    +update(int activeUsers): void
+  }
+  class CounterWidget {
+    +update(int activeUsers): void
+  }
+  interface MetricObserver <<interfaz>> {
+  }
+  class RealtimeDashboard {
+    +attach(MetricObserver observer): void
+    +setActiveUsers(int activeUsers): void
+  }
 }
-interface "pattern.MetricObserver" as pattern_MetricObserver {
-}
-class "pattern.RealtimeDashboard" as pattern_RealtimeDashboard {
-  +attach(MetricObserver observer): void
-  +setActiveUsers(int activeUsers): void
-}
-pattern_MetricObserver <|.. pattern_ChartWidget
-pattern_MetricObserver <|.. pattern_CounterWidget
-main_Main ..> pattern_ChartWidget : instancia
-main_Main ..> pattern_CounterWidget : instancia
-main_Main ..> pattern_RealtimeDashboard : instancia
-pattern_ChartWidget --> pattern_MetricObserver : usa
-pattern_CounterWidget --> pattern_MetricObserver : usa
-pattern_RealtimeDashboard --> pattern_MetricObserver : usa
+
+MetricObserver <|.. ChartWidget
+MetricObserver <|.. CounterWidget
+Main ..> ChartWidget : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

@@ -1,7 +1,6 @@
 package main;
 
-import pattern.*;
-
+import static pattern.PatternImplementation.*;
 public class Main {
     public static void main(String[] args) {
     Shape icon = new Shape("circulo", "azul", 10, 10);

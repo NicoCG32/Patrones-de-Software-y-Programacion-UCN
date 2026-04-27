@@ -15,7 +15,7 @@ Cada fabrica concreta representa una familia energetica completa y entrega scoot
 ## Organizacion del proyecto
 
 - `src/main`: contiene el punto de entrada del sistema.
-- `src/pattern`: contiene las clases que implementan el patron aplicado al problema.
+- `src/pattern/PatternImplementation.java`: contiene todas las clases e interfaces del patron en un solo archivo.
 
 ## Ejecutar
 
@@ -28,4 +28,3 @@ java -cp out main.Main
 ## UML de la implementacion
 
 ![UML de la implementacion](UML.png)
-

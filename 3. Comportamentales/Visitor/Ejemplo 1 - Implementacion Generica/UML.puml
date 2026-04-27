@@ -1,42 +1,48 @@
 @startuml
 title Visitor - Ejemplo 1 - Implementacion Generica
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-interface "pattern.Element" as pattern_Element {
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.ElementA" as pattern_ElementA {
-  +accept(Visitor visitor): void
-  +value(): String
+
+package "pattern" #ECFDF5 {
+  interface Element <<interfaz>> {
+  }
+  class ElementA {
+    +accept(Visitor visitor): void
+    +value(): String
+  }
+  class ElementB {
+    +accept(Visitor visitor): void
+    +value(): String
+  }
+  class ReportVisitor {
+    +visit(ElementA element): void
+    +visit(ElementB element): void
+  }
+  interface Visitor <<interfaz>> {
+  }
 }
-class "pattern.ElementB" as pattern_ElementB {
-  +accept(Visitor visitor): void
-  +value(): String
-}
-class "pattern.ReportVisitor" as pattern_ReportVisitor {
-  +visit(ElementA element): void
-  +visit(ElementB element): void
-}
-interface "pattern.Visitor" as pattern_Visitor {
-}
-pattern_Element <|.. pattern_ElementA
-pattern_Element <|.. pattern_ElementB
-pattern_Visitor <|.. pattern_ReportVisitor
-main_Main --> pattern_Element : usa
-main_Main ..> pattern_ElementA : instancia
-main_Main ..> pattern_ElementB : instancia
-main_Main ..> pattern_ReportVisitor : instancia
-main_Main --> pattern_Visitor : usa
-pattern_Element --> pattern_Visitor : usa
-pattern_ElementA --> pattern_Element : usa
-pattern_ElementA --> pattern_Visitor : usa
-pattern_ElementB --> pattern_Element : usa
-pattern_ElementB --> pattern_Visitor : usa
-pattern_ReportVisitor --> pattern_ElementA : usa
-pattern_ReportVisitor --> pattern_ElementB : usa
-pattern_ReportVisitor --> pattern_Visitor : usa
-pattern_Visitor --> pattern_ElementA : usa
-pattern_Visitor --> pattern_ElementB : usa
+
+Element <|.. ElementA
+Element <|.. ElementB
+Visitor <|.. ReportVisitor
+Main ..> ElementA : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

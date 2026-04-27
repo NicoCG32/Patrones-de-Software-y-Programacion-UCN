@@ -1,65 +1,90 @@
 @startuml
 title Abstract Factory - Ejemplo 2 - solucion para conectores de bases de datos
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-interface "pattern.DatabaseCommand" as pattern_DatabaseCommand {
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-interface "pattern.DatabaseConnection" as pattern_DatabaseConnection {
+
+package "pattern" #ECFDF5 {
+  interface DatabaseCommand <<interfaz>> {
+  }
+  interface DatabaseConnection <<interfaz>> {
+  }
+  interface DatabaseDriverFactory <<interfaz>> {
+  }
+  class MySqlCommand {
+    +execute(String sql): String
+  }
+  class MySqlConnection {
+    +open(): String
+  }
+  class MySqlDriverFactory {
+    +createConnection(): DatabaseConnection
+    +createCommand(): DatabaseCommand
+  }
+  class PostgresCommand {
+    +execute(String sql): String
+  }
+  class PostgresConnection {
+    +open(): String
+  }
+  class PostgresDriverFactory {
+    +createConnection(): DatabaseConnection
+    +createCommand(): DatabaseCommand
+  }
+  class Repository {
+    +findOrders(): void
+  }
 }
-interface "pattern.DatabaseDriverFactory" as pattern_DatabaseDriverFactory {
-}
-class "pattern.MySqlCommand" as pattern_MySqlCommand {
-  +execute(String sql): String
-}
-class "pattern.MySqlConnection" as pattern_MySqlConnection {
-  +open(): String
-}
-class "pattern.MySqlDriverFactory" as pattern_MySqlDriverFactory {
-  +createConnection(): DatabaseConnection
-  +createCommand(): DatabaseCommand
-}
-class "pattern.PostgresCommand" as pattern_PostgresCommand {
-  +execute(String sql): String
-}
-class "pattern.PostgresConnection" as pattern_PostgresConnection {
-  +open(): String
-}
-class "pattern.PostgresDriverFactory" as pattern_PostgresDriverFactory {
-  +createConnection(): DatabaseConnection
-  +createCommand(): DatabaseCommand
-}
-class "pattern.Repository" as pattern_Repository {
-  +Repository(DatabaseDriverFactory factory)
-  +findOrders(): void
-}
-pattern_DatabaseCommand <|.. pattern_MySqlCommand
-pattern_DatabaseConnection <|.. pattern_MySqlConnection
-pattern_DatabaseDriverFactory <|.. pattern_MySqlDriverFactory
-pattern_DatabaseCommand <|.. pattern_PostgresCommand
-pattern_DatabaseConnection <|.. pattern_PostgresConnection
-pattern_DatabaseDriverFactory <|.. pattern_PostgresDriverFactory
-main_Main ..> pattern_PostgresDriverFactory : instancia
-main_Main ..> pattern_Repository : instancia
-pattern_DatabaseDriverFactory --> pattern_DatabaseCommand : usa
-pattern_DatabaseDriverFactory --> pattern_DatabaseConnection : usa
-pattern_MySqlCommand --> pattern_DatabaseCommand : usa
-pattern_MySqlConnection --> pattern_DatabaseConnection : usa
-pattern_MySqlDriverFactory --> pattern_DatabaseCommand : usa
-pattern_MySqlDriverFactory --> pattern_DatabaseConnection : usa
-pattern_MySqlDriverFactory --> pattern_DatabaseDriverFactory : usa
-pattern_MySqlDriverFactory ..> pattern_MySqlCommand : instancia
-pattern_MySqlDriverFactory ..> pattern_MySqlConnection : instancia
-pattern_PostgresCommand --> pattern_DatabaseCommand : usa
-pattern_PostgresConnection --> pattern_DatabaseConnection : usa
-pattern_PostgresDriverFactory --> pattern_DatabaseCommand : usa
-pattern_PostgresDriverFactory --> pattern_DatabaseConnection : usa
-pattern_PostgresDriverFactory --> pattern_DatabaseDriverFactory : usa
-pattern_PostgresDriverFactory ..> pattern_PostgresCommand : instancia
-pattern_PostgresDriverFactory ..> pattern_PostgresConnection : instancia
-pattern_Repository --> pattern_DatabaseCommand : usa
-pattern_Repository --> pattern_DatabaseConnection : usa
-pattern_Repository --> pattern_DatabaseDriverFactory : usa
+
+DatabaseCommand <|.. MySqlCommand
+DatabaseConnection <|.. MySqlConnection
+DatabaseDriverFactory <|.. MySqlDriverFactory
+DatabaseCommand <|.. PostgresCommand
+DatabaseConnection <|.. PostgresConnection
+DatabaseDriverFactory <|.. PostgresDriverFactory
+DatabaseCommand ..> MySqlCommand : crea
+DatabaseCommand ..> MySqlConnection : crea
+DatabaseCommand ..> PostgresCommand : crea
+DatabaseCommand ..> PostgresConnection : crea
+DatabaseConnection ..> MySqlCommand : crea
+DatabaseConnection ..> MySqlConnection : crea
+DatabaseConnection ..> PostgresCommand : crea
+DatabaseConnection ..> PostgresConnection : crea
+DatabaseDriverFactory ..> MySqlCommand : crea
+DatabaseDriverFactory ..> MySqlConnection : crea
+DatabaseDriverFactory ..> PostgresCommand : crea
+DatabaseDriverFactory ..> PostgresConnection : crea
+MySqlCommand ..> MySqlConnection : crea
+MySqlCommand ..> PostgresCommand : crea
+MySqlCommand ..> PostgresConnection : crea
+MySqlConnection ..> MySqlCommand : crea
+MySqlConnection ..> PostgresCommand : crea
+MySqlConnection ..> PostgresConnection : crea
+MySqlDriverFactory ..> MySqlCommand : crea
+MySqlDriverFactory ..> MySqlConnection : crea
+MySqlDriverFactory ..> PostgresCommand : crea
+MySqlDriverFactory ..> PostgresConnection : crea
+PostgresCommand ..> PostgresConnection : crea
+PostgresConnection ..> PostgresCommand : crea
+PostgresDriverFactory ..> PostgresCommand : crea
+PostgresDriverFactory ..> PostgresConnection : crea
+Main ..> MySqlCommand : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

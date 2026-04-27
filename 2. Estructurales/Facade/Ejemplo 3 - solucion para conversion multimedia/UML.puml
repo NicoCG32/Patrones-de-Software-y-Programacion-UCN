@@ -1,24 +1,48 @@
 @startuml
 title Facade - Ejemplo 3 - solucion para conversion multimedia
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.FilterEngine" as pattern_FilterEngine {
-  +apply(String filter): void
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.MediaConversionFacade" as pattern_MediaConversionFacade {
-  +convert(String file, String format): void
+
+package "pattern" #ECFDF5 {
+  class FilterEngine {
+    +apply(String filter): void
+  }
+  class MediaConversionFacade {
+    +convert(String file, String format): void
+  }
+  class VideoDecoder {
+    +decode(String file): void
+  }
+  class VideoEncoder {
+    +encode(String format): void
+  }
 }
-class "pattern.VideoDecoder" as pattern_VideoDecoder {
-  +decode(String file): void
-}
-class "pattern.VideoEncoder" as pattern_VideoEncoder {
-  +encode(String format): void
-}
-main_Main ..> pattern_MediaConversionFacade : instancia
-pattern_MediaConversionFacade ..> pattern_FilterEngine : instancia
-pattern_MediaConversionFacade ..> pattern_VideoDecoder : instancia
-pattern_MediaConversionFacade ..> pattern_VideoEncoder : instancia
+
+FilterEngine ..> VideoEncoder : crea
+FilterEngine ..> VideoDecoder : crea
+MediaConversionFacade ..> FilterEngine : crea
+MediaConversionFacade ..> VideoEncoder : crea
+MediaConversionFacade ..> VideoDecoder : crea
+VideoDecoder ..> FilterEngine : crea
+VideoDecoder ..> VideoEncoder : crea
+Main ..> FilterEngine : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

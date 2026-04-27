@@ -1,29 +1,43 @@
 @startuml
 title Strategy - Ejemplo 1 - Implementacion Generica
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
 skinparam classAttributeIconSize 0
-hide empty fields
-class "main.Main" as main_Main {
-  +main(String[] args): void
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.AggressiveStrategy" as pattern_AggressiveStrategy {
-  +execute(double value): double
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.ConservativeStrategy" as pattern_ConservativeStrategy {
-  +execute(double value): double
+
+package "pattern" #ECFDF5 {
+  class AggressiveStrategy {
+    +execute(double value): double
+  }
+  class ConservativeStrategy {
+    +execute(double value): double
+  }
+  class Context {
+    +setStrategy(Strategy strategy): void
+    +resolve(double value): double
+  }
+  interface Strategy <<interfaz>> {
+  }
 }
-class "pattern.Context" as pattern_Context {
-  +Context(Strategy strategy)
-  +setStrategy(Strategy strategy): void
-  +resolve(double value): double
-}
-interface "pattern.Strategy" as pattern_Strategy {
-}
-pattern_Strategy <|.. pattern_AggressiveStrategy
-pattern_Strategy <|.. pattern_ConservativeStrategy
-main_Main ..> pattern_AggressiveStrategy : instancia
-main_Main ..> pattern_ConservativeStrategy : instancia
-main_Main ..> pattern_Context : instancia
-pattern_AggressiveStrategy --> pattern_Strategy : usa
-pattern_ConservativeStrategy --> pattern_Strategy : usa
-pattern_Context --> pattern_Strategy : usa
+
+Strategy <|.. AggressiveStrategy
+Strategy <|.. ConservativeStrategy
+Main ..> AggressiveStrategy : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
 @enduml

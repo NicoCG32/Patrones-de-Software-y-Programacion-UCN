@@ -1,35 +1,42 @@
 @startuml
-title Builder moderno - configuracion HTTP
-class "main.Main" as Main {
-  +main(args: String[]): void
+title Builder - Ejemplo 4 - Builder moderno sin Director para configuracion HTTP
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
 }
-class "pattern.HttpClientConfig" as Config {
-  -baseUrl: String
-  -timeoutSeconds: int
-  -retries: int
-  -token: String
-  -tlsRequired: boolean
-  +builder(baseUrl: String): Builder
-  +describe(): String
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
 }
-class "pattern.HttpClientConfig.Builder" as Builder {
-  -baseUrl: String
-  -timeoutSeconds: int
-  -retries: int
-  -token: String
-  -tlsRequired: boolean
-  +timeoutSeconds(value: int): Builder
-  +retries(value: int): Builder
-  +bearerToken(token: String): Builder
-  +allowInsecureLocalhost(): Builder
-  +build(): HttpClientConfig
+
+package "pattern" #ECFDF5 {
+  class HttpClientConfig {
+    +describe(): String
+    +builder(String baseUrl): Builder
+  }
+  class Builder {
+    +timeoutSeconds(int timeoutSeconds): Builder
+    +retries(int retries): Builder
+    +bearerToken(String token): Builder
+    +allowInsecureLocalhost(): Builder
+    +build(): HttpClientConfig
+  }
 }
-Main ..> Config : usa API fluida
-Config *-- Builder
-Builder ..> Config : construye
-note right of Builder
-No existe Director.
-El cliente expresa la configuracion
-encadenando metodos.
+
+HttpClientConfig ..> Builder : crea
+Builder ..> HttpClientConfig : crea
+Main ..> HttpClientConfig : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
 end note
 @enduml
