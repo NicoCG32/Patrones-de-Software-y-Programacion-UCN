@@ -1,0 +1,34 @@
+@startuml
+title Builder - clases
+interface ReportBuilder {
+  +buildTitle()
+  +buildBody()
+  +buildFooter()
+  +getResult(): Report
+}
+class ExecutiveReportBuilder
+class Director { +construct(builder): Report }
+class Report
+ReportBuilder <|.. ExecutiveReportBuilder
+Director --> ReportBuilder : ordena pasos
+ExecutiveReportBuilder --> Report : ensambla
+note right of Director
+Controla el algoritmo.
+No conoce la representacion interna.
+end note
+@enduml
+
+@startuml
+title Builder - interaccion
+participant Main
+participant Director
+participant "builder: ReportBuilder" as B
+participant Report
+Main -> Director : construct(builder)
+Director -> B : buildTitle()
+Director -> B : buildBody()
+Director -> B : buildFooter()
+Director -> B : getResult()
+B --> Director : Report
+Director --> Main : Report
+@enduml

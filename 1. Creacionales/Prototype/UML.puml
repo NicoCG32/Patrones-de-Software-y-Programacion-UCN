@@ -1,0 +1,24 @@
+@startuml
+title Prototype - clases
+interface Prototype<T> { +copy(): T }
+class QueryTemplate {
+  -table: String
+  -filter: String
+  +copy(): QueryTemplate
+  +withFilter(filter): QueryTemplate
+}
+class Client
+Prototype <|.. QueryTemplate
+Client --> Prototype : clona
+@enduml
+
+@startuml
+title Prototype - interaccion
+participant Client
+participant "base: QueryTemplate" as Base
+participant "copy: QueryTemplate" as Copy
+Client -> Base : copy()
+Base --> Client : Copy
+Client -> Copy : withFilter("status=CLOSED")
+Copy --> Client : variante
+@enduml

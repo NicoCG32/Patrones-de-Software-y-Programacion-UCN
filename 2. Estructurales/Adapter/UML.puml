@@ -1,0 +1,24 @@
+@startuml
+title Adapter - clases
+interface PaymentProcessor { +pay(cents: int) }
+class PaymentGatewayAdapter {
+  -gateway: LegacyPaymentGateway
+  +pay(cents: int)
+}
+class LegacyPaymentGateway { +makePayment(amount: double) }
+class CheckoutService
+PaymentProcessor <|.. PaymentGatewayAdapter
+PaymentGatewayAdapter --> LegacyPaymentGateway : traduce y delega
+CheckoutService --> PaymentProcessor : usa interfaz objetivo
+@enduml
+
+@startuml
+title Adapter - interaccion
+participant CheckoutService
+participant "adapter: PaymentProcessor" as A
+participant LegacyPaymentGateway
+CheckoutService -> A : pay(2590)
+A -> LegacyPaymentGateway : makePayment(25.90)
+LegacyPaymentGateway --> A : ok
+A --> CheckoutService : ok
+@enduml

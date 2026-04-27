@@ -1,0 +1,30 @@
+@startuml
+title Decorator - clases
+interface Message { +content(): String }
+class PlainMessage
+abstract class MessageDecorator {
+  -wrapped: Message
+  +content(): String
+}
+class EncryptedMessage
+class SignedMessage
+Message <|.. PlainMessage
+Message <|.. MessageDecorator
+MessageDecorator <|-- EncryptedMessage
+MessageDecorator <|-- SignedMessage
+MessageDecorator --> Message : envuelve
+@enduml
+
+@startuml
+title Decorator - interaccion
+participant Client
+participant SignedMessage
+participant EncryptedMessage
+participant PlainMessage
+Client -> SignedMessage : content()
+SignedMessage -> EncryptedMessage : content()
+EncryptedMessage -> PlainMessage : content()
+PlainMessage --> EncryptedMessage : datos
+EncryptedMessage --> SignedMessage : encrypt(datos)
+SignedMessage --> Client : sign(encrypt(datos))
+@enduml

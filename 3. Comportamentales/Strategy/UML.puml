@@ -1,0 +1,26 @@
+@startuml
+title Strategy - clases
+interface DiscountStrategy { +apply(price: double): double }
+class NoDiscount
+class PercentageDiscount
+class Cart {
+  -strategy: DiscountStrategy
+  +setStrategy(strategy)
+  +total(price): double
+}
+DiscountStrategy <|.. NoDiscount
+DiscountStrategy <|.. PercentageDiscount
+Cart --> DiscountStrategy : delega algoritmo
+@enduml
+
+@startuml
+title Strategy - interaccion
+participant Client
+participant Cart
+participant PercentageDiscount
+Client -> Cart : setStrategy(PercentageDiscount)
+Client -> Cart : total(100)
+Cart -> PercentageDiscount : apply(100)
+PercentageDiscount --> Cart : 80
+Cart --> Client : 80
+@enduml
