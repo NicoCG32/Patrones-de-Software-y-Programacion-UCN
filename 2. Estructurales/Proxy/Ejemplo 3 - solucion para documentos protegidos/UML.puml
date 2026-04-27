@@ -1,0 +1,23 @@
+@startuml
+title Proxy - Ejemplo 3 - solucion para documentos protegidos
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.Document" as pattern_Document {
+}
+class "pattern.ProtectedDocumentProxy" as pattern_ProtectedDocumentProxy {
+  +open(String userRole): void
+}
+class "pattern.SecureDocument" as pattern_SecureDocument {
+  +open(String userRole): void
+}
+pattern_Document <|.. pattern_ProtectedDocumentProxy
+pattern_Document <|.. pattern_SecureDocument
+main_Main --> pattern_Document : usa
+main_Main ..> pattern_ProtectedDocumentProxy : instancia
+pattern_ProtectedDocumentProxy --> pattern_Document : usa
+pattern_ProtectedDocumentProxy ..> pattern_SecureDocument : instancia
+pattern_SecureDocument --> pattern_Document : usa
+@enduml

@@ -1,0 +1,65 @@
+@startuml
+title Abstract Factory - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.Client" as pattern_Client {
+  +Client(FamilyFactory factory)
+  +run(): void
+}
+class "pattern.FamilyAFactory" as pattern_FamilyAFactory {
+  +createPrimary(): Primary
+  +createSecondary(): Secondary
+}
+class "pattern.FamilyAPrimary" as pattern_FamilyAPrimary {
+  +describe(): String
+}
+class "pattern.FamilyASecondary" as pattern_FamilyASecondary {
+  +describe(): String
+}
+class "pattern.FamilyBFactory" as pattern_FamilyBFactory {
+  +createPrimary(): Primary
+  +createSecondary(): Secondary
+}
+class "pattern.FamilyBPrimary" as pattern_FamilyBPrimary {
+  +describe(): String
+}
+class "pattern.FamilyBSecondary" as pattern_FamilyBSecondary {
+  +describe(): String
+}
+interface "pattern.FamilyFactory" as pattern_FamilyFactory {
+}
+interface "pattern.Primary" as pattern_Primary {
+}
+interface "pattern.Secondary" as pattern_Secondary {
+}
+pattern_FamilyFactory <|.. pattern_FamilyAFactory
+pattern_Primary <|.. pattern_FamilyAPrimary
+pattern_Secondary <|.. pattern_FamilyASecondary
+pattern_FamilyFactory <|.. pattern_FamilyBFactory
+pattern_Primary <|.. pattern_FamilyBPrimary
+pattern_Secondary <|.. pattern_FamilyBSecondary
+main_Main ..> pattern_Client : instancia
+main_Main ..> pattern_FamilyAFactory : instancia
+pattern_Client --> pattern_FamilyFactory : usa
+pattern_Client --> pattern_Primary : usa
+pattern_Client --> pattern_Secondary : usa
+pattern_FamilyAFactory ..> pattern_FamilyAPrimary : instancia
+pattern_FamilyAFactory ..> pattern_FamilyASecondary : instancia
+pattern_FamilyAFactory --> pattern_FamilyFactory : usa
+pattern_FamilyAFactory --> pattern_Primary : usa
+pattern_FamilyAFactory --> pattern_Secondary : usa
+pattern_FamilyAPrimary --> pattern_Primary : usa
+pattern_FamilyASecondary --> pattern_Secondary : usa
+pattern_FamilyBFactory ..> pattern_FamilyBPrimary : instancia
+pattern_FamilyBFactory ..> pattern_FamilyBSecondary : instancia
+pattern_FamilyBFactory --> pattern_FamilyFactory : usa
+pattern_FamilyBFactory --> pattern_Primary : usa
+pattern_FamilyBFactory --> pattern_Secondary : usa
+pattern_FamilyBPrimary --> pattern_Primary : usa
+pattern_FamilyBSecondary --> pattern_Secondary : usa
+pattern_FamilyFactory --> pattern_Primary : usa
+pattern_FamilyFactory --> pattern_Secondary : usa
+@enduml

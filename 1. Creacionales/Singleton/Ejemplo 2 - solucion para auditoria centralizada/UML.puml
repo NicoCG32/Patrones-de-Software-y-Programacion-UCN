@@ -1,0 +1,8 @@
+@startuml
+title Singleton - Ejemplo 2 - solucion para auditoria centralizada
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+title Builder moderno - orden de compra
+class "main.Main" as Main
+class "pattern.PurchaseOrder" as Order {
+  -buyer: String
+  -items: List<String>
+  -discount: double
+  -shippingMethod: String
+  +builder(buyer: String): Builder
+  +total(): double
+  +describe(): String
+}
+class "pattern.PurchaseOrder.Builder" as Builder {
+  -buyer: String
+  -items: List<String>
+  -discount: double
+  -shippingMethod: String
+  +addItem(sku: String): Builder
+  +discount(value: double): Builder
+  +shippingMethod(method: String): Builder
+  +build(): PurchaseOrder
+}
+Main ..> Order
+Order *-- Builder
+Builder ..> Order : valida y construye
+@enduml

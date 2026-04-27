@@ -1,0 +1,18 @@
+@startuml
+title Prototype - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.Prototype" as pattern_Prototype {
+}
+class "pattern.Template" as pattern_Template {
+  +Template(String base, String variation)
+  +copy(): Template
+  +withVariation(String newVariation): Template
+  +toString(): String
+}
+main_Main ..> pattern_Template : instancia
+pattern_Template --> pattern_Prototype : usa
+@enduml

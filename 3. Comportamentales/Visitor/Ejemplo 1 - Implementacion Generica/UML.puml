@@ -1,0 +1,42 @@
+@startuml
+title Visitor - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.Element" as pattern_Element {
+}
+class "pattern.ElementA" as pattern_ElementA {
+  +accept(Visitor visitor): void
+  +value(): String
+}
+class "pattern.ElementB" as pattern_ElementB {
+  +accept(Visitor visitor): void
+  +value(): String
+}
+class "pattern.ReportVisitor" as pattern_ReportVisitor {
+  +visit(ElementA element): void
+  +visit(ElementB element): void
+}
+interface "pattern.Visitor" as pattern_Visitor {
+}
+pattern_Element <|.. pattern_ElementA
+pattern_Element <|.. pattern_ElementB
+pattern_Visitor <|.. pattern_ReportVisitor
+main_Main --> pattern_Element : usa
+main_Main ..> pattern_ElementA : instancia
+main_Main ..> pattern_ElementB : instancia
+main_Main ..> pattern_ReportVisitor : instancia
+main_Main --> pattern_Visitor : usa
+pattern_Element --> pattern_Visitor : usa
+pattern_ElementA --> pattern_Element : usa
+pattern_ElementA --> pattern_Visitor : usa
+pattern_ElementB --> pattern_Element : usa
+pattern_ElementB --> pattern_Visitor : usa
+pattern_ReportVisitor --> pattern_ElementA : usa
+pattern_ReportVisitor --> pattern_ElementB : usa
+pattern_ReportVisitor --> pattern_Visitor : usa
+pattern_Visitor --> pattern_ElementA : usa
+pattern_Visitor --> pattern_ElementB : usa
+@enduml

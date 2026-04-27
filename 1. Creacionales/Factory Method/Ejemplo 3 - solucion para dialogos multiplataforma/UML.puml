@@ -1,0 +1,38 @@
+@startuml
+title Factory Method - Ejemplo 3 - solucion para dialogos multiplataforma
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.Button" as pattern_Button {
+}
+abstract class "pattern.Dialog" as pattern_Dialog {
+  +renderWindow(): void
+}
+class "pattern.WebButton" as pattern_WebButton {
+  +render(): void
+}
+class "pattern.WebDialog" as pattern_WebDialog {
+}
+class "pattern.WindowsButton" as pattern_WindowsButton {
+  +render(): void
+}
+class "pattern.WindowsDialog" as pattern_WindowsDialog {
+}
+pattern_Button <|.. pattern_WebButton
+pattern_Dialog <|-- pattern_WebDialog
+pattern_Button <|.. pattern_WindowsButton
+pattern_Dialog <|-- pattern_WindowsDialog
+main_Main --> pattern_Dialog : usa
+main_Main ..> pattern_WebDialog : instancia
+pattern_Dialog --> pattern_Button : usa
+pattern_WebButton --> pattern_Button : usa
+pattern_WebDialog --> pattern_Button : usa
+pattern_WebDialog --> pattern_Dialog : usa
+pattern_WebDialog ..> pattern_WebButton : instancia
+pattern_WindowsButton --> pattern_Button : usa
+pattern_WindowsDialog --> pattern_Button : usa
+pattern_WindowsDialog --> pattern_Dialog : usa
+pattern_WindowsDialog ..> pattern_WindowsButton : instancia
+@enduml

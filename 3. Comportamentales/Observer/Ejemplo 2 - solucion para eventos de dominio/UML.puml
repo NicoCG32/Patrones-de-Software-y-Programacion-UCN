@@ -1,0 +1,28 @@
+@startuml
+title Observer - Ejemplo 2 - solucion para eventos de dominio
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.BillingListener" as pattern_BillingListener {
+  +onOrderCreated(String orderId): void
+}
+interface "pattern.DomainEventListener" as pattern_DomainEventListener {
+}
+class "pattern.InventoryListener" as pattern_InventoryListener {
+  +onOrderCreated(String orderId): void
+}
+class "pattern.OrderPublisher" as pattern_OrderPublisher {
+  +subscribe(DomainEventListener listener): void
+  +createOrder(String orderId): void
+}
+pattern_DomainEventListener <|.. pattern_BillingListener
+pattern_DomainEventListener <|.. pattern_InventoryListener
+main_Main ..> pattern_BillingListener : instancia
+main_Main ..> pattern_InventoryListener : instancia
+main_Main ..> pattern_OrderPublisher : instancia
+pattern_BillingListener --> pattern_DomainEventListener : usa
+pattern_InventoryListener --> pattern_DomainEventListener : usa
+pattern_OrderPublisher --> pattern_DomainEventListener : usa
+@enduml

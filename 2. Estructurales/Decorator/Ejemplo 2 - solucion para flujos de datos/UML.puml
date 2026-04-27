@@ -1,0 +1,37 @@
+@startuml
+title Decorator - Ejemplo 2 - solucion para flujos de datos
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.BufferedStream" as pattern_BufferedStream {
+  +BufferedStream(DataStream wrapped)
+  +read(): String
+}
+interface "pattern.DataStream" as pattern_DataStream {
+}
+class "pattern.EncryptedStream" as pattern_EncryptedStream {
+  +EncryptedStream(DataStream wrapped)
+  +read(): String
+}
+class "pattern.FileStream" as pattern_FileStream {
+  +read(): String
+}
+abstract class "pattern.StreamDecorator" as pattern_StreamDecorator {
+}
+pattern_StreamDecorator <|-- pattern_BufferedStream
+pattern_StreamDecorator <|-- pattern_EncryptedStream
+pattern_DataStream <|.. pattern_FileStream
+pattern_DataStream <|.. pattern_StreamDecorator
+main_Main ..> pattern_BufferedStream : instancia
+main_Main --> pattern_DataStream : usa
+main_Main ..> pattern_EncryptedStream : instancia
+main_Main ..> pattern_FileStream : instancia
+pattern_BufferedStream --> pattern_DataStream : usa
+pattern_BufferedStream --> pattern_StreamDecorator : usa
+pattern_EncryptedStream --> pattern_DataStream : usa
+pattern_EncryptedStream --> pattern_StreamDecorator : usa
+pattern_FileStream --> pattern_DataStream : usa
+pattern_StreamDecorator --> pattern_DataStream : usa
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title Builder - Ejemplo 3 - solucion para datos de prueba
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.TestUserBuilder" as pattern_TestUserBuilder {
+  +named(String name): TestUserBuilder
+  +asAdmin(): TestUserBuilder
+  +inactive(): TestUserBuilder
+  +build(): User
+}
+class "pattern.User" as pattern_User {
+  +User(String name, String role, boolean active)
+  +toString(): String
+}
+main_Main ..> pattern_TestUserBuilder : instancia
+main_Main --> pattern_User : usa
+pattern_TestUserBuilder ..> pattern_User : instancia
+@enduml

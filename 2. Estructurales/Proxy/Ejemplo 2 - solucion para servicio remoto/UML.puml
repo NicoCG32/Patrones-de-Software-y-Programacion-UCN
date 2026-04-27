@@ -1,0 +1,23 @@
+@startuml
+title Proxy - Ejemplo 2 - solucion para servicio remoto
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.CachingReportProxy" as pattern_CachingReportProxy {
+  +fetchReport(String id): String
+}
+class "pattern.RemoteReportService" as pattern_RemoteReportService {
+  +fetchReport(String id): String
+}
+interface "pattern.ReportService" as pattern_ReportService {
+}
+pattern_ReportService <|.. pattern_CachingReportProxy
+pattern_ReportService <|.. pattern_RemoteReportService
+main_Main ..> pattern_CachingReportProxy : instancia
+main_Main --> pattern_ReportService : usa
+pattern_CachingReportProxy ..> pattern_RemoteReportService : instancia
+pattern_CachingReportProxy --> pattern_ReportService : usa
+pattern_RemoteReportService --> pattern_ReportService : usa
+@enduml

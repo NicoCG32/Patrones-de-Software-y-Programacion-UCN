@@ -1,0 +1,38 @@
+@startuml
+title Decorator - Ejemplo 3 - solucion para calculo de precios
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.BasePrice" as pattern_BasePrice {
+  +BasePrice(double value)
+  +amount(): double
+}
+interface "pattern.Price" as pattern_Price {
+}
+abstract class "pattern.PriceDecorator" as pattern_PriceDecorator {
+}
+class "pattern.ShippingPrice" as pattern_ShippingPrice {
+  +ShippingPrice(Price wrapped)
+  +amount(): double
+}
+class "pattern.TaxPrice" as pattern_TaxPrice {
+  +TaxPrice(Price wrapped)
+  +amount(): double
+}
+pattern_Price <|.. pattern_BasePrice
+pattern_Price <|.. pattern_PriceDecorator
+pattern_PriceDecorator <|-- pattern_ShippingPrice
+pattern_PriceDecorator <|-- pattern_TaxPrice
+main_Main ..> pattern_BasePrice : instancia
+main_Main --> pattern_Price : usa
+main_Main ..> pattern_ShippingPrice : instancia
+main_Main ..> pattern_TaxPrice : instancia
+pattern_BasePrice --> pattern_Price : usa
+pattern_PriceDecorator --> pattern_Price : usa
+pattern_ShippingPrice --> pattern_Price : usa
+pattern_ShippingPrice --> pattern_PriceDecorator : usa
+pattern_TaxPrice --> pattern_Price : usa
+pattern_TaxPrice --> pattern_PriceDecorator : usa
+@enduml

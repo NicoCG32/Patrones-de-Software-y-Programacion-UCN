@@ -1,0 +1,26 @@
+@startuml
+title Factory Method - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.ConcreteCreator" as pattern_ConcreteCreator {
+}
+class "pattern.ConcreteProduct" as pattern_ConcreteProduct {
+  +name(): String
+}
+abstract class "pattern.Creator" as pattern_Creator {
+  +process(): void
+}
+interface "pattern.Product" as pattern_Product {
+}
+pattern_Creator <|-- pattern_ConcreteCreator
+pattern_Product <|.. pattern_ConcreteProduct
+main_Main ..> pattern_ConcreteCreator : instancia
+pattern_ConcreteCreator ..> pattern_ConcreteProduct : instancia
+pattern_ConcreteCreator --> pattern_Creator : usa
+pattern_ConcreteCreator --> pattern_Product : usa
+pattern_ConcreteProduct --> pattern_Product : usa
+pattern_Creator --> pattern_Product : usa
+@enduml

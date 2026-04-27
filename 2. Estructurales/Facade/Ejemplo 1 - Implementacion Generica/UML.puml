@@ -1,0 +1,24 @@
+@startuml
+title Facade - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.Facade" as pattern_Facade {
+  +runProcess(): void
+}
+class "pattern.StepA" as pattern_StepA {
+  +check(): boolean
+}
+class "pattern.StepB" as pattern_StepB {
+  +execute(): void
+}
+class "pattern.StepC" as pattern_StepC {
+  +finish(): void
+}
+main_Main ..> pattern_Facade : instancia
+pattern_Facade ..> pattern_StepA : instancia
+pattern_Facade ..> pattern_StepB : instancia
+pattern_Facade ..> pattern_StepC : instancia
+@enduml

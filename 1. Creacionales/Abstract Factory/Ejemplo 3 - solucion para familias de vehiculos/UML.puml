@@ -1,0 +1,63 @@
+@startuml
+title Abstract Factory - Ejemplo 3 - solucion para familias de vehiculos
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.Car" as pattern_Car {
+}
+class "pattern.Catalog" as pattern_Catalog {
+  +Catalog(VehicleFactory factory)
+  +showFamily(): void
+}
+class "pattern.ElectricCar" as pattern_ElectricCar {
+  +specs(): String
+}
+class "pattern.ElectricScooter" as pattern_ElectricScooter {
+  +specs(): String
+}
+class "pattern.ElectricVehicleFactory" as pattern_ElectricVehicleFactory {
+  +createScooter(): Scooter
+  +createCar(): Car
+}
+class "pattern.GasCar" as pattern_GasCar {
+  +specs(): String
+}
+class "pattern.GasScooter" as pattern_GasScooter {
+  +specs(): String
+}
+class "pattern.GasVehicleFactory" as pattern_GasVehicleFactory {
+  +createScooter(): Scooter
+  +createCar(): Car
+}
+interface "pattern.Scooter" as pattern_Scooter {
+}
+interface "pattern.VehicleFactory" as pattern_VehicleFactory {
+}
+pattern_Car <|.. pattern_ElectricCar
+pattern_Scooter <|.. pattern_ElectricScooter
+pattern_VehicleFactory <|.. pattern_ElectricVehicleFactory
+pattern_Car <|.. pattern_GasCar
+pattern_Scooter <|.. pattern_GasScooter
+pattern_VehicleFactory <|.. pattern_GasVehicleFactory
+main_Main ..> pattern_Catalog : instancia
+main_Main ..> pattern_ElectricVehicleFactory : instancia
+pattern_Catalog --> pattern_VehicleFactory : usa
+pattern_ElectricCar --> pattern_Car : usa
+pattern_ElectricScooter --> pattern_Scooter : usa
+pattern_ElectricVehicleFactory --> pattern_Car : usa
+pattern_ElectricVehicleFactory ..> pattern_ElectricCar : instancia
+pattern_ElectricVehicleFactory ..> pattern_ElectricScooter : instancia
+pattern_ElectricVehicleFactory --> pattern_Scooter : usa
+pattern_ElectricVehicleFactory --> pattern_VehicleFactory : usa
+pattern_GasCar --> pattern_Car : usa
+pattern_GasScooter --> pattern_Scooter : usa
+pattern_GasVehicleFactory --> pattern_Car : usa
+pattern_GasVehicleFactory ..> pattern_GasCar : instancia
+pattern_GasVehicleFactory ..> pattern_GasScooter : instancia
+pattern_GasVehicleFactory --> pattern_Scooter : usa
+pattern_GasVehicleFactory --> pattern_VehicleFactory : usa
+pattern_VehicleFactory --> pattern_Car : usa
+pattern_VehicleFactory --> pattern_Scooter : usa
+@enduml

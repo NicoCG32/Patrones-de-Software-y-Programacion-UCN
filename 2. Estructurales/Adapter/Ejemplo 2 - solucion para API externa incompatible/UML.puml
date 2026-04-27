@@ -1,0 +1,29 @@
+@startuml
+title Adapter - Ejemplo 2 - solucion para API externa incompatible
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.CrmCustomerAdapter" as pattern_CrmCustomerAdapter {
+  +CrmCustomerAdapter(ExternalCrmApi api)
+  +findCustomer(String id): Customer
+}
+class "pattern.Customer" as pattern_Customer {
+  +Customer(String id, String name)
+  +toString(): String
+}
+interface "pattern.CustomerProvider" as pattern_CustomerProvider {
+}
+class "pattern.ExternalCrmApi" as pattern_ExternalCrmApi {
+  +getCustomerXml(String id): String
+}
+pattern_CustomerProvider <|.. pattern_CrmCustomerAdapter
+main_Main ..> pattern_CrmCustomerAdapter : instancia
+main_Main --> pattern_CustomerProvider : usa
+main_Main ..> pattern_ExternalCrmApi : instancia
+pattern_CrmCustomerAdapter ..> pattern_Customer : instancia
+pattern_CrmCustomerAdapter --> pattern_CustomerProvider : usa
+pattern_CrmCustomerAdapter --> pattern_ExternalCrmApi : usa
+pattern_CustomerProvider --> pattern_Customer : usa
+@enduml

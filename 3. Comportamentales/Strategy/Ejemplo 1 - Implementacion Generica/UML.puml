@@ -1,0 +1,29 @@
+@startuml
+title Strategy - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.AggressiveStrategy" as pattern_AggressiveStrategy {
+  +execute(double value): double
+}
+class "pattern.ConservativeStrategy" as pattern_ConservativeStrategy {
+  +execute(double value): double
+}
+class "pattern.Context" as pattern_Context {
+  +Context(Strategy strategy)
+  +setStrategy(Strategy strategy): void
+  +resolve(double value): double
+}
+interface "pattern.Strategy" as pattern_Strategy {
+}
+pattern_Strategy <|.. pattern_AggressiveStrategy
+pattern_Strategy <|.. pattern_ConservativeStrategy
+main_Main ..> pattern_AggressiveStrategy : instancia
+main_Main ..> pattern_ConservativeStrategy : instancia
+main_Main ..> pattern_Context : instancia
+pattern_AggressiveStrategy --> pattern_Strategy : usa
+pattern_ConservativeStrategy --> pattern_Strategy : usa
+pattern_Context --> pattern_Strategy : usa
+@enduml

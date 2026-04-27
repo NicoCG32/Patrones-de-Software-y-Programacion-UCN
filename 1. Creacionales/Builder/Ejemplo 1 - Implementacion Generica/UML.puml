@@ -1,0 +1,34 @@
+@startuml
+title Builder - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.Builder" as pattern_Builder {
+}
+class "pattern.ConcreteBuilder" as pattern_ConcreteBuilder {
+  +buildHeader(): void
+  +buildBody(): void
+  +buildFooter(): void
+  +result(): Product
+}
+class "pattern.Director" as pattern_Director {
+  +construct(Builder builder): Product
+}
+class "pattern.Product" as pattern_Product {
+  +setHeader(String header): void
+  +setBody(String body): void
+  +setFooter(String footer): void
+  +toString(): String
+}
+pattern_Builder <|.. pattern_ConcreteBuilder
+main_Main ..> pattern_ConcreteBuilder : instancia
+main_Main ..> pattern_Director : instancia
+main_Main --> pattern_Product : usa
+pattern_Builder --> pattern_Product : usa
+pattern_ConcreteBuilder --> pattern_Builder : usa
+pattern_ConcreteBuilder ..> pattern_Product : instancia
+pattern_Director --> pattern_Builder : usa
+pattern_Director --> pattern_Product : usa
+@enduml

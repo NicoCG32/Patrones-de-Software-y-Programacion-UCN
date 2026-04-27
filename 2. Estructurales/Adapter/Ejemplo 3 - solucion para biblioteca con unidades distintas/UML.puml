@@ -1,0 +1,23 @@
+@startuml
+title Adapter - Ejemplo 3 - solucion para biblioteca con unidades distintas
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.DistanceCalculator" as pattern_DistanceCalculator {
+}
+class "pattern.KilometerAdapter" as pattern_KilometerAdapter {
+  +KilometerAdapter(MilesLibrary library)
+  +distanceInKilometers(double origin, double destination): double
+}
+class "pattern.MilesLibrary" as pattern_MilesLibrary {
+  +distanceInMiles(double origin, double destination): double
+}
+pattern_DistanceCalculator <|.. pattern_KilometerAdapter
+main_Main --> pattern_DistanceCalculator : usa
+main_Main ..> pattern_KilometerAdapter : instancia
+main_Main ..> pattern_MilesLibrary : instancia
+pattern_KilometerAdapter --> pattern_DistanceCalculator : usa
+pattern_KilometerAdapter --> pattern_MilesLibrary : usa
+@enduml

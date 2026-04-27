@@ -1,0 +1,28 @@
+@startuml
+title Builder moderno - perfil de usuario
+class "main.Main" as Main
+class "pattern.UserProfile" as Profile {
+  -username: String
+  -displayName: String
+  -locale: String
+  -twoFactorEnabled: boolean
+  -newsletterEnabled: boolean
+  +builder(username: String): Builder
+  +describe(): String
+}
+class "pattern.UserProfile.Builder" as Builder {
+  -username: String
+  -displayName: String
+  -locale: String
+  -twoFactorEnabled: boolean
+  -newsletterEnabled: boolean
+  +displayName(value: String): Builder
+  +locale(value: String): Builder
+  +enableTwoFactor(): Builder
+  +disableNewsletter(): Builder
+  +build(): UserProfile
+}
+Main ..> Profile
+Profile *-- Builder
+Builder ..> Profile : construye instancia inmutable
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+title Prototype - Ejemplo 2 - solucion para configuraciones de consulta
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.QueryPrototype" as pattern_QueryPrototype {
+}
+class "pattern.QueryTemplate" as pattern_QueryTemplate {
+  +QueryTemplate(String table, String filter)
+  +copy(): QueryTemplate
+  +withFilter(String newFilter): QueryTemplate
+  +sql(): String
+}
+pattern_QueryPrototype <|.. pattern_QueryTemplate
+main_Main ..> pattern_QueryTemplate : instancia
+pattern_QueryPrototype --> pattern_QueryTemplate : usa
+pattern_QueryTemplate --> pattern_QueryPrototype : usa
+@enduml

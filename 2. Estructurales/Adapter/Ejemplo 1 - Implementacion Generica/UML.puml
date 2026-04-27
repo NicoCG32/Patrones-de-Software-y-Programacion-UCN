@@ -1,0 +1,29 @@
+@startuml
+title Adapter - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.Adapter" as pattern_Adapter {
+  +Adapter(LegacyService legacy)
+  +request(int normalizedValue): void
+}
+class "pattern.Client" as pattern_Client {
+  +Client(Target target)
+  +execute(): void
+}
+class "pattern.LegacyService" as pattern_LegacyService {
+  +specificRequest(double externalValue): void
+}
+interface "pattern.Target" as pattern_Target {
+}
+pattern_Target <|.. pattern_Adapter
+main_Main ..> pattern_Adapter : instancia
+main_Main ..> pattern_Client : instancia
+main_Main ..> pattern_LegacyService : instancia
+main_Main --> pattern_Target : usa
+pattern_Adapter --> pattern_LegacyService : usa
+pattern_Adapter --> pattern_Target : usa
+pattern_Client --> pattern_Target : usa
+@enduml

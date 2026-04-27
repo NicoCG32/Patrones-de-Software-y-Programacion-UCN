@@ -1,0 +1,35 @@
+@startuml
+title Builder moderno - configuracion HTTP
+class "main.Main" as Main {
+  +main(args: String[]): void
+}
+class "pattern.HttpClientConfig" as Config {
+  -baseUrl: String
+  -timeoutSeconds: int
+  -retries: int
+  -token: String
+  -tlsRequired: boolean
+  +builder(baseUrl: String): Builder
+  +describe(): String
+}
+class "pattern.HttpClientConfig.Builder" as Builder {
+  -baseUrl: String
+  -timeoutSeconds: int
+  -retries: int
+  -token: String
+  -tlsRequired: boolean
+  +timeoutSeconds(value: int): Builder
+  +retries(value: int): Builder
+  +bearerToken(token: String): Builder
+  +allowInsecureLocalhost(): Builder
+  +build(): HttpClientConfig
+}
+Main ..> Config : usa API fluida
+Config *-- Builder
+Builder ..> Config : construye
+note right of Builder
+No existe Director.
+El cliente expresa la configuracion
+encadenando metodos.
+end note
+@enduml

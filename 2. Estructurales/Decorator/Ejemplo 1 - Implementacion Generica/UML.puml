@@ -1,0 +1,37 @@
+@startuml
+title Decorator - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.BaseComponent" as pattern_BaseComponent {
+  +operation(): String
+}
+interface "pattern.Component" as pattern_Component {
+}
+abstract class "pattern.Decorator" as pattern_Decorator {
+}
+class "pattern.FirstResponsibility" as pattern_FirstResponsibility {
+  +FirstResponsibility(Component wrapped)
+  +operation(): String
+}
+class "pattern.SecondResponsibility" as pattern_SecondResponsibility {
+  +SecondResponsibility(Component wrapped)
+  +operation(): String
+}
+pattern_Component <|.. pattern_BaseComponent
+pattern_Component <|.. pattern_Decorator
+pattern_Decorator <|-- pattern_FirstResponsibility
+pattern_Decorator <|-- pattern_SecondResponsibility
+main_Main ..> pattern_BaseComponent : instancia
+main_Main --> pattern_Component : usa
+main_Main ..> pattern_FirstResponsibility : instancia
+main_Main ..> pattern_SecondResponsibility : instancia
+pattern_BaseComponent --> pattern_Component : usa
+pattern_Decorator --> pattern_Component : usa
+pattern_FirstResponsibility --> pattern_Component : usa
+pattern_FirstResponsibility --> pattern_Decorator : usa
+pattern_SecondResponsibility --> pattern_Component : usa
+pattern_SecondResponsibility --> pattern_Decorator : usa
+@enduml

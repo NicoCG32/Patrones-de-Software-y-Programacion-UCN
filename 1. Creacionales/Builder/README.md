@@ -69,3 +69,13 @@ java -cp src Main
 - Mensajes complejos con secciones opcionales.
 - Pipelines con pasos obligatorios y extensiones opcionales.
 - Documentos con muchas partes parametrizables.
+
+## Version moderna sin Director
+
+Ademas de la version clasica con `Director`, este repositorio incluye tres ejemplos de Builder moderno sin Director:
+
+- `Ejemplo 4 - Builder moderno sin Director para configuracion HTTP`: configuracion fluida con parametros opcionales y validacion final.
+- `Ejemplo 5 - Builder moderno sin Director para orden de compra`: acumulacion de items, descuento y metodo de despacho antes de construir la orden.
+- `Ejemplo 6 - Builder moderno sin Director para perfil de usuario`: construccion de un objeto de perfil con valores por defecto y metodos semanticos.
+
+Esta variante es adecuada cuando el orden de construccion no necesita extraerse como una receta independiente. El cliente usa una API fluida y el metodo `build()` concentra la validacion.

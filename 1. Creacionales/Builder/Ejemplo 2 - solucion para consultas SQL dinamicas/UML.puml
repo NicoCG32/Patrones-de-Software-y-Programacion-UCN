@@ -1,0 +1,22 @@
+@startuml
+title Builder - Ejemplo 2 - solucion para consultas SQL dinamicas
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.SqlQuery" as pattern_SqlQuery {
+  +SqlQuery(String sql)
+  +toString(): String
+}
+class "pattern.SqlQueryBuilder" as pattern_SqlQueryBuilder {
+  +select(String columns): SqlQueryBuilder
+  +from(String table): SqlQueryBuilder
+  +where(String condition): SqlQueryBuilder
+  +orderBy(String column): SqlQueryBuilder
+  +build(): SqlQuery
+}
+main_Main --> pattern_SqlQuery : usa
+main_Main ..> pattern_SqlQueryBuilder : instancia
+pattern_SqlQueryBuilder ..> pattern_SqlQuery : instancia
+@enduml

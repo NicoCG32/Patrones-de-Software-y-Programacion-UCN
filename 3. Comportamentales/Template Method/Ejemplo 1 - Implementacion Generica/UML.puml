@@ -1,0 +1,16 @@
+@startuml
+title Template Method - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.ConcreteProcess" as pattern_ConcreteProcess {
+}
+abstract class "pattern.ProcessTemplate" as pattern_ProcessTemplate {
+  +run(): void
+}
+pattern_ProcessTemplate <|-- pattern_ConcreteProcess
+main_Main ..> pattern_ConcreteProcess : instancia
+pattern_ConcreteProcess --> pattern_ProcessTemplate : usa
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+title Observer - Ejemplo 1 - Implementacion Generica
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.ConsoleObserver" as pattern_ConsoleObserver {
+  +ConsoleObserver(String name)
+  +update(String event): void
+}
+interface "pattern.Observer" as pattern_Observer {
+}
+class "pattern.Subject" as pattern_Subject {
+  +attach(Observer observer): void
+  +change(String value): void
+}
+pattern_Observer <|.. pattern_ConsoleObserver
+main_Main ..> pattern_ConsoleObserver : instancia
+main_Main ..> pattern_Subject : instancia
+pattern_ConsoleObserver --> pattern_Observer : usa
+pattern_Subject --> pattern_Observer : usa
+@enduml

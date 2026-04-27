@@ -1,0 +1,29 @@
+@startuml
+title Strategy - Ejemplo 3 - solucion para calculo de rutas
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.CheapestRoute" as pattern_CheapestRoute {
+  +calculate(String origin, String destination): String
+}
+class "pattern.FastestRoute" as pattern_FastestRoute {
+  +calculate(String origin, String destination): String
+}
+class "pattern.Navigator" as pattern_Navigator {
+  +Navigator(RouteStrategy strategy)
+  +setStrategy(RouteStrategy strategy): void
+  +navigate(String origin, String destination): void
+}
+interface "pattern.RouteStrategy" as pattern_RouteStrategy {
+}
+pattern_RouteStrategy <|.. pattern_CheapestRoute
+pattern_RouteStrategy <|.. pattern_FastestRoute
+main_Main ..> pattern_CheapestRoute : instancia
+main_Main ..> pattern_FastestRoute : instancia
+main_Main ..> pattern_Navigator : instancia
+pattern_CheapestRoute --> pattern_RouteStrategy : usa
+pattern_FastestRoute --> pattern_RouteStrategy : usa
+pattern_Navigator --> pattern_RouteStrategy : usa
+@enduml

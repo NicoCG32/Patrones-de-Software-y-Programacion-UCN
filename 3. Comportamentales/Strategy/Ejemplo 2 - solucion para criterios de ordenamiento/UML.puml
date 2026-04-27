@@ -1,0 +1,37 @@
+@startuml
+title Strategy - Ejemplo 2 - solucion para criterios de ordenamiento
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.PriceSortStrategy" as pattern_PriceSortStrategy {
+  +sort(List<Product> products): void
+}
+class "pattern.Product" as pattern_Product {
+  +Product(String name, double price, int relevance)
+  +toString(): String
+}
+class "pattern.ProductCatalog" as pattern_ProductCatalog {
+  +ProductCatalog(SortStrategy strategy)
+  +setStrategy(SortStrategy strategy): void
+  +show(List<Product> products): void
+}
+class "pattern.RelevanceSortStrategy" as pattern_RelevanceSortStrategy {
+  +sort(List<Product> products): void
+}
+interface "pattern.SortStrategy" as pattern_SortStrategy {
+}
+pattern_SortStrategy <|.. pattern_PriceSortStrategy
+pattern_SortStrategy <|.. pattern_RelevanceSortStrategy
+main_Main ..> pattern_PriceSortStrategy : instancia
+main_Main ..> pattern_Product : instancia
+main_Main ..> pattern_ProductCatalog : instancia
+pattern_PriceSortStrategy --> pattern_Product : usa
+pattern_PriceSortStrategy --> pattern_SortStrategy : usa
+pattern_ProductCatalog --> pattern_Product : usa
+pattern_ProductCatalog --> pattern_SortStrategy : usa
+pattern_RelevanceSortStrategy --> pattern_Product : usa
+pattern_RelevanceSortStrategy --> pattern_SortStrategy : usa
+pattern_SortStrategy --> pattern_Product : usa
+@enduml

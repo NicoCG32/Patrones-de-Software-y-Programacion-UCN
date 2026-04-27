@@ -1,0 +1,38 @@
+@startuml
+title Factory Method - Ejemplo 2 - solucion para transporte logistico
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+abstract class "pattern.Logistics" as pattern_Logistics {
+  +planDelivery(String packageId): void
+}
+class "pattern.RoadLogistics" as pattern_RoadLogistics {
+}
+class "pattern.SeaLogistics" as pattern_SeaLogistics {
+}
+class "pattern.Ship" as pattern_Ship {
+  +deliver(String packageId): void
+}
+interface "pattern.Transport" as pattern_Transport {
+}
+class "pattern.Truck" as pattern_Truck {
+  +deliver(String packageId): void
+}
+pattern_Logistics <|-- pattern_RoadLogistics
+pattern_Logistics <|-- pattern_SeaLogistics
+pattern_Transport <|.. pattern_Ship
+pattern_Transport <|.. pattern_Truck
+main_Main --> pattern_Logistics : usa
+main_Main ..> pattern_RoadLogistics : instancia
+pattern_Logistics --> pattern_Transport : usa
+pattern_RoadLogistics --> pattern_Logistics : usa
+pattern_RoadLogistics --> pattern_Transport : usa
+pattern_RoadLogistics ..> pattern_Truck : instancia
+pattern_SeaLogistics --> pattern_Logistics : usa
+pattern_SeaLogistics ..> pattern_Ship : instancia
+pattern_SeaLogistics --> pattern_Transport : usa
+pattern_Ship --> pattern_Transport : usa
+pattern_Truck --> pattern_Transport : usa
+@enduml

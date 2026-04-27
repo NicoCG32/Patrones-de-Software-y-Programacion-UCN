@@ -1,0 +1,20 @@
+@startuml
+title Prototype - Ejemplo 3 - solucion para figuras graficas
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+interface "pattern.GraphicPrototype" as pattern_GraphicPrototype {
+}
+class "pattern.Shape" as pattern_Shape {
+  +Shape(String type, String color, int x, int y)
+  +copy(): Shape
+  +moveTo(int newX, int newY): Shape
+  +describe(): String
+}
+pattern_GraphicPrototype <|.. pattern_Shape
+main_Main ..> pattern_Shape : instancia
+pattern_GraphicPrototype --> pattern_Shape : usa
+pattern_Shape --> pattern_GraphicPrototype : usa
+@enduml

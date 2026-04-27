@@ -1,0 +1,24 @@
+@startuml
+title Facade - Ejemplo 2 - solucion para arranque de aplicacion
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.ApplicationFacade" as pattern_ApplicationFacade {
+  +start(): void
+}
+class "pattern.ConfigurationLoader" as pattern_ConfigurationLoader {
+  +load(): void
+}
+class "pattern.Database" as pattern_Database {
+  +connect(): void
+}
+class "pattern.Logger" as pattern_Logger {
+  +start(): void
+}
+main_Main ..> pattern_ApplicationFacade : instancia
+pattern_ApplicationFacade ..> pattern_ConfigurationLoader : instancia
+pattern_ApplicationFacade ..> pattern_Database : instancia
+pattern_ApplicationFacade ..> pattern_Logger : instancia
+@enduml

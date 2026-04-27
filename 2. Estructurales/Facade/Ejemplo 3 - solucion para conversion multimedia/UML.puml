@@ -1,0 +1,24 @@
+@startuml
+title Facade - Ejemplo 3 - solucion para conversion multimedia
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.FilterEngine" as pattern_FilterEngine {
+  +apply(String filter): void
+}
+class "pattern.MediaConversionFacade" as pattern_MediaConversionFacade {
+  +convert(String file, String format): void
+}
+class "pattern.VideoDecoder" as pattern_VideoDecoder {
+  +decode(String file): void
+}
+class "pattern.VideoEncoder" as pattern_VideoEncoder {
+  +encode(String format): void
+}
+main_Main ..> pattern_MediaConversionFacade : instancia
+pattern_MediaConversionFacade ..> pattern_FilterEngine : instancia
+pattern_MediaConversionFacade ..> pattern_VideoDecoder : instancia
+pattern_MediaConversionFacade ..> pattern_VideoEncoder : instancia
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+title Visitor - Ejemplo 3 - solucion para auditoria de items
+skinparam classAttributeIconSize 0
+hide empty fields
+class "main.Main" as main_Main {
+  +main(String[] args): void
+}
+class "pattern.AuditVisitor" as pattern_AuditVisitor {
+  +visit(Book book): void
+  +visit(SoftwareLicense license): void
+}
+class "pattern.Book" as pattern_Book {
+  +title(): String
+  +accept(ItemVisitor visitor): void
+}
+interface "pattern.Item" as pattern_Item {
+}
+interface "pattern.ItemVisitor" as pattern_ItemVisitor {
+}
+class "pattern.SoftwareLicense" as pattern_SoftwareLicense {
+  +key(): String
+  +accept(ItemVisitor visitor): void
+}
+pattern_ItemVisitor <|.. pattern_AuditVisitor
+pattern_Item <|.. pattern_Book
+pattern_Item <|.. pattern_SoftwareLicense
+main_Main ..> pattern_AuditVisitor : instancia
+main_Main ..> pattern_Book : instancia
+main_Main --> pattern_ItemVisitor : usa
+main_Main ..> pattern_SoftwareLicense : instancia
+pattern_AuditVisitor --> pattern_Book : usa
+pattern_AuditVisitor --> pattern_ItemVisitor : usa
+pattern_AuditVisitor --> pattern_SoftwareLicense : usa
+pattern_Book --> pattern_Item : usa
+pattern_Book --> pattern_ItemVisitor : usa
+pattern_Item --> pattern_ItemVisitor : usa
+pattern_ItemVisitor --> pattern_Book : usa
+pattern_ItemVisitor --> pattern_SoftwareLicense : usa
+pattern_SoftwareLicense --> pattern_Item : usa
+pattern_SoftwareLicense --> pattern_ItemVisitor : usa
+@enduml
