@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HistorialEventoRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Solicitudes MVC Degradado</a> &gt; <a href="index.source.html" class="el_package">cl.ucn.solicitudes.infra.jpa</a> &gt; <span class="el_source">HistorialEventoRepository.java</span></div><h1>HistorialEventoRepository.java</h1><pre class="source lang-java linenums">package cl.ucn.solicitudes.infra.jpa;
+
+import cl.ucn.solicitudes.domain.model.HistorialEvento;
+import jakarta.persistence.EntityManager;
+
+import java.util.List;
+
+<span class="nc" id="L8">public class HistorialEventoRepository {</span>
+
+    public HistorialEvento guardar(HistorialEvento evento) {
+<span class="nc" id="L11">        EntityManager em = JpaUtil.entityManager();</span>
+        try {
+<span class="nc" id="L13">            em.getTransaction().begin();</span>
+<span class="nc" id="L14">            em.persist(evento);</span>
+<span class="nc" id="L15">            em.flush();</span>
+<span class="nc" id="L16">            em.getTransaction().commit();</span>
+<span class="nc" id="L17">            return evento;</span>
+        } finally {
+<span class="nc" id="L19">            em.close();</span>
+        }
+    }
+
+    public List&lt;HistorialEvento&gt; buscarTodos() {
+<span class="nc" id="L24">        EntityManager em = JpaUtil.entityManager();</span>
+        try {
+<span class="nc" id="L26">            return em.createQuery(&quot;select h from HistorialEvento h&quot;, HistorialEvento.class)</span>
+<span class="nc" id="L27">                    .getResultList();</span>
+        } finally {
+<span class="nc" id="L29">            em.close();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EstudianteService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Solicitudes MVC Degradado</a> &gt; <a href="index.source.html" class="el_package">cl.ucn.solicitudes.application</a> &gt; <span class="el_source">EstudianteService.java</span></div><h1>EstudianteService.java</h1><pre class="source lang-java linenums">package cl.ucn.solicitudes.application;
+
+import cl.ucn.solicitudes.domain.model.Estudiante;
+import cl.ucn.solicitudes.domain.repository.EstudiantePort;
+import cl.ucn.solicitudes.infra.jpa.EstudianteRepository;
+import java.util.Optional;
+
+public class EstudianteService {
+
+    private final EstudiantePort estudiantePort;
+
+<span class="nc" id="L12">    public EstudianteService(EstudiantePort estudiantePort) {</span>
+<span class="nc" id="L13">        this.estudiantePort = estudiantePort;</span>
+<span class="nc" id="L14">    }</span>
+
+    public Estudiante guardar(String nombre, String correo) {
+<span class="nc" id="L17">        Estudiante estudiante = new Estudiante(nombre, correo);</span>
+<span class="nc" id="L18">        return estudiantePort.guardar(estudiante);</span>
+    }
+
+    public Optional&lt;Estudiante&gt; buscarPorId(Long estudianteId) {
+<span class="nc" id="L22">        return estudiantePort.buscarPorId(estudianteId);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

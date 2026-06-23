@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SolicitudJavaFxView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Solicitudes MVC Degradado</a> &gt; <a href="index.source.html" class="el_package">cl.ucn.solicitudes.view</a> &gt; <span class="el_source">SolicitudJavaFxView.java</span></div><h1>SolicitudJavaFxView.java</h1><pre class="source lang-java linenums">package cl.ucn.solicitudes.view;
+
+import cl.ucn.solicitudes.controller.SolicitudController;
+import cl.ucn.solicitudes.domain.model.EstadoSolicitud;
+import cl.ucn.solicitudes.domain.model.Estudiante;
+import cl.ucn.solicitudes.domain.model.Solicitud;
+import cl.ucn.solicitudes.domain.service.NotificadorExterno;
+import cl.ucn.solicitudes.domain.service.PublicadorEventosSolicitud;
+import cl.ucn.solicitudes.infra.external.ServicioCorreoExterno;
+import cl.ucn.solicitudes.infra.jpa.EstudianteRepository;
+import cl.ucn.solicitudes.infra.jpa.SolicitudRepository;
+import cl.ucn.solicitudes.infra.messaging.VertxPublicadorEventosSolicitud;
+import io.vertx.core.Vertx;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ * Vista JavaFX mínima.
+ *
+ * Esta clase representa la capa View del patrón MVC.
+ *
+ * Responsabilidad esperada:
+ * - capturar datos desde la interfaz;
+ * - mostrar resultados;
+ * - delegar acciones en el controlador.
+ *
+ * No debería acceder a repositorios ni a servicios externos.
+ */
+public class SolicitudJavaFxView {
+
+    private final SolicitudController controller;
+
+<span class="nc" id="L41">    public SolicitudJavaFxView(SolicitudController sc) {</span>
+<span class="nc" id="L42">        this.controller = sc;</span>
+        // Se invierte la dependencia
+<span class="nc" id="L44">    }</span>
+
+    public void mostrar(Stage stage) {
+<span class="nc" id="L47">        Label titulo = new Label(&quot;Sistema de solicitudes académicas&quot;);</span>
+
+<span class="nc" id="L49">        TextField nombreField = new TextField();</span>
+<span class="nc" id="L50">        nombreField.setPromptText(&quot;Nombre del estudiante&quot;);</span>
+
+<span class="nc" id="L52">        TextField correoField = new TextField();</span>
+<span class="nc" id="L53">        correoField.setPromptText(&quot;Correo institucional&quot;);</span>
+
+<span class="nc" id="L55">        TextField tipoField = new TextField();</span>
+<span class="nc" id="L56">        tipoField.setPromptText(&quot;Tipo de solicitud&quot;);</span>
+
+<span class="nc" id="L58">        TextArea descripcionArea = new TextArea();</span>
+<span class="nc" id="L59">        descripcionArea.setPromptText(&quot;Descripción de la solicitud&quot;);</span>
+<span class="nc" id="L60">        descripcionArea.setPrefRowCount(4);</span>
+
+<span class="nc" id="L62">        ComboBox&lt;EstadoSolicitud&gt; estadoComboBox = new ComboBox&lt;&gt;();</span>
+<span class="nc" id="L63">        estadoComboBox.getItems().addAll(</span>
+                EstadoSolicitud.EN_REVISION,
+                EstadoSolicitud.APROBADA,
+                EstadoSolicitud.RECHAZADA
+        );
+<span class="nc" id="L68">        estadoComboBox.setValue(EstadoSolicitud.EN_REVISION);</span>
+
+<span class="nc" id="L70">        Label resultadoLabel = new Label(&quot;Ingrese los datos y presione Registrar solicitud.&quot;);</span>
+
+<span class="nc" id="L72">        Button registrarButton = new Button(&quot;Registrar solicitud&quot;);</span>
+<span class="nc" id="L73">        registrarButton.setOnAction(event -&gt; {</span>
+            try {
+<span class="nc" id="L75">                Estudiante estudiante = controller.registrarEstudiante(</span>
+<span class="nc" id="L76">                        nombreField.getText(),</span>
+<span class="nc" id="L77">                        correoField.getText()</span>
+                );
+
+<span class="nc" id="L80">                Solicitud solicitud = controller.crearSolicitud(</span>
+<span class="nc" id="L81">                        estudiante.getId(),</span>
+<span class="nc" id="L82">                        tipoField.getText(),</span>
+<span class="nc" id="L83">                        descripcionArea.getText()</span>
+                );
+
+<span class="nc" id="L86">                Solicitud actualizada = controller.cambiarEstado(</span>
+<span class="nc" id="L87">                        solicitud.getId(),</span>
+<span class="nc" id="L88">                        estadoComboBox.getValue()</span>
+                );
+
+<span class="nc" id="L91">                resultadoLabel.setText(</span>
+<span class="nc" id="L92">                        &quot;Solicitud ID &quot; + actualizada.getId()</span>
+<span class="nc" id="L93">                                + &quot; creada para &quot; + estudiante.getNombre()</span>
+<span class="nc" id="L94">                                + &quot; con estado &quot; + actualizada.getEstado()</span>
+                );
+<span class="nc" id="L96">            } catch (Exception ex) {</span>
+<span class="nc" id="L97">                resultadoLabel.setText(&quot;Error: &quot; + ex.getMessage());</span>
+<span class="nc" id="L98">            }</span>
+<span class="nc" id="L99">        });</span>
+
+<span class="nc" id="L101">        GridPane formulario = new GridPane();</span>
+<span class="nc" id="L102">        formulario.setHgap(10);</span>
+<span class="nc" id="L103">        formulario.setVgap(10);</span>
+
+<span class="nc" id="L105">        formulario.add(new Label(&quot;Nombre:&quot;), 0, 0);</span>
+<span class="nc" id="L106">        formulario.add(nombreField, 1, 0);</span>
+
+<span class="nc" id="L108">        formulario.add(new Label(&quot;Correo:&quot;), 0, 1);</span>
+<span class="nc" id="L109">        formulario.add(correoField, 1, 1);</span>
+
+<span class="nc" id="L111">        formulario.add(new Label(&quot;Tipo:&quot;), 0, 2);</span>
+<span class="nc" id="L112">        formulario.add(tipoField, 1, 2);</span>
+
+<span class="nc" id="L114">        formulario.add(new Label(&quot;Descripción:&quot;), 0, 3);</span>
+<span class="nc" id="L115">        formulario.add(descripcionArea, 1, 3);</span>
+
+<span class="nc" id="L117">        formulario.add(new Label(&quot;Nuevo estado:&quot;), 0, 4);</span>
+<span class="nc" id="L118">        formulario.add(estadoComboBox, 1, 4);</span>
+
+<span class="nc" id="L120">        VBox root = new VBox(12, titulo, formulario, registrarButton, resultadoLabel);</span>
+<span class="nc" id="L121">        root.setPadding(new Insets(16));</span>
+
+<span class="nc" id="L123">        Scene scene = new Scene(root, 620, 420);</span>
+<span class="nc" id="L124">        stage.setTitle(&quot;Solicitudes académicas - MVC degradado&quot;);</span>
+<span class="nc" id="L125">        stage.setScene(scene);</span>
+<span class="nc" id="L126">        stage.show();</span>
+<span class="nc" id="L127">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

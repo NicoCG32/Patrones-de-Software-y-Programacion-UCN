@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HistorialEvento.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Solicitudes MVC Degradado</a> &gt; <a href="index.source.html" class="el_package">cl.ucn.solicitudes.domain.model</a> &gt; <span class="el_source">HistorialEvento.java</span></div><h1>HistorialEvento.java</h1><pre class="source lang-java linenums">package cl.ucn.solicitudes.domain.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;historial_eventos&quot;)
+public class HistorialEvento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name=&quot;solicitud_id&quot;, nullable = false)
+    private Long solicitudId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name=&quot;estado_anterior&quot;, nullable = false)
+    private EstadoSolicitud estadoAnterior;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name=&quot;estado_nuevo&quot;, nullable = false)
+    private EstadoSolicitud estadoNuevo;
+
+    @Column(name=&quot;fecha_cambio&quot;, nullable = false)
+    private LocalDateTime fechaCambio;
+
+    @Column(name=&quot;recibido_por&quot;, nullable = false)
+    private String recibidoPor;
+
+<span class="nc" id="L39">    protected HistorialEvento() {</span>
+        // Requerido por JPA.
+<span class="nc" id="L41">    }</span>
+
+    public HistorialEvento(Long solicitudId,
+                           EstadoSolicitud estadoAnterior,
+                           EstadoSolicitud estadoNuevo,
+                           LocalDateTime fechaCambio,
+<span class="nc" id="L47">                           String recibidoPor) {</span>
+<span class="nc" id="L48">        this.solicitudId = solicitudId;</span>
+<span class="nc" id="L49">        this.estadoAnterior = estadoAnterior;</span>
+<span class="nc" id="L50">        this.estadoNuevo = estadoNuevo;</span>
+<span class="nc" id="L51">        this.fechaCambio = fechaCambio;</span>
+<span class="nc" id="L52">        this.recibidoPor = recibidoPor;</span>
+<span class="nc" id="L53">    }</span>
+
+    public Long getId() {
+<span class="nc" id="L56">        return id;</span>
+    }
+
+    public Long getSolicitudId() {
+<span class="nc" id="L60">        return solicitudId;</span>
+    }
+
+    public EstadoSolicitud getEstadoAnterior() {
+<span class="nc" id="L64">        return estadoAnterior;</span>
+    }
+
+    public EstadoSolicitud getEstadoNuevo() {
+<span class="nc" id="L68">        return estadoNuevo;</span>
+    }
+
+    public LocalDateTime getFechaCambio() {
+<span class="nc" id="L72">        return fechaCambio;</span>
+    }
+
+    public String getRecibidoPor() {
+<span class="nc" id="L76">        return recibidoPor;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
