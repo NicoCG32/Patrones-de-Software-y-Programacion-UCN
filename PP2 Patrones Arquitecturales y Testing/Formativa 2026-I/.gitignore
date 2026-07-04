@@ -1,8 +1,0 @@
-target/
-*.db
-*.sqlite
-*.sqlite3
-.idea/
-.vscode/
-*.iml
-.DS_Store
