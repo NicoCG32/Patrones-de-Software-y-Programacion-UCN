@@ -1,0 +1,92 @@
+@startuml
+title Abstract Factory - Ejemplo 1 - Implementacion Generica
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  class Client {
+    +run(): void
+  }
+  class FamilyAFactory {
+    +createPrimary(): Primary
+    +createSecondary(): Secondary
+  }
+  class FamilyAPrimary {
+    +describe(): String
+  }
+  class FamilyASecondary {
+    +describe(): String
+  }
+  class FamilyBFactory {
+    +createPrimary(): Primary
+    +createSecondary(): Secondary
+  }
+  class FamilyBPrimary {
+    +describe(): String
+  }
+  class FamilyBSecondary {
+    +describe(): String
+  }
+  interface FamilyFactory <<interfaz>> {
+  }
+  interface Primary <<interfaz>> {
+  }
+  interface Secondary <<interfaz>> {
+  }
+}
+
+FamilyFactory <|.. FamilyAFactory
+Primary <|.. FamilyAPrimary
+Secondary <|.. FamilyASecondary
+FamilyFactory <|.. FamilyBFactory
+Primary <|.. FamilyBPrimary
+Secondary <|.. FamilyBSecondary
+Client ..> FamilyASecondary : crea
+Client ..> FamilyBPrimary : crea
+Client ..> FamilyAPrimary : crea
+Client ..> FamilyBSecondary : crea
+FamilyAFactory ..> FamilyASecondary : crea
+FamilyAFactory ..> FamilyBPrimary : crea
+FamilyAFactory ..> FamilyAPrimary : crea
+FamilyAFactory ..> FamilyBSecondary : crea
+FamilyAPrimary ..> FamilyASecondary : crea
+FamilyAPrimary ..> FamilyBPrimary : crea
+FamilyAPrimary ..> FamilyBSecondary : crea
+FamilyASecondary ..> FamilyBPrimary : crea
+FamilyASecondary ..> FamilyBSecondary : crea
+FamilyBFactory ..> FamilyBPrimary : crea
+FamilyBFactory ..> FamilyBSecondary : crea
+FamilyBPrimary ..> FamilyBSecondary : crea
+FamilyFactory ..> FamilyASecondary : crea
+FamilyFactory ..> FamilyBPrimary : crea
+FamilyFactory ..> FamilyAPrimary : crea
+FamilyFactory ..> FamilyBSecondary : crea
+Primary ..> FamilyASecondary : crea
+Primary ..> FamilyBPrimary : crea
+Primary ..> FamilyAPrimary : crea
+Primary ..> FamilyBSecondary : crea
+Secondary ..> FamilyASecondary : crea
+Secondary ..> FamilyBPrimary : crea
+Secondary ..> FamilyAPrimary : crea
+Secondary ..> FamilyBSecondary : crea
+Main ..> Client : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
+@enduml

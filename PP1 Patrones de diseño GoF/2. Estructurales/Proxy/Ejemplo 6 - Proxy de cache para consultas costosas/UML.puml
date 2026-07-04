@@ -1,0 +1,36 @@
+@startuml
+title Proxy de cache - consultas costosas
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  interface ReportRepository <<Subject>> {
++findById(id: String): String
+  }
+  class DatabaseReportRepository <<RealSubject>>
+  class CachedReportProxy <<Proxy>>
+}
+
+ReportRepository <|.. DatabaseReportRepository
+ReportRepository <|.. CachedReportProxy
+CachedReportProxy --> DatabaseReportRepository : controla/delega
+Main ..> ReportRepository : usa misma interfaz
+
+note bottom of CachedReportProxy
+Evita llamadas repetidas al sujeto real cuando ya existe una respuesta cacheada.
+end note
+@enduml

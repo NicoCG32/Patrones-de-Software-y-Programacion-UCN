@@ -1,0 +1,90 @@
+@startuml
+title Abstract Factory - Ejemplo 2 - solucion para conectores de bases de datos
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  interface DatabaseCommand <<interfaz>> {
+  }
+  interface DatabaseConnection <<interfaz>> {
+  }
+  interface DatabaseDriverFactory <<interfaz>> {
+  }
+  class MySqlCommand {
+    +execute(String sql): String
+  }
+  class MySqlConnection {
+    +open(): String
+  }
+  class MySqlDriverFactory {
+    +createConnection(): DatabaseConnection
+    +createCommand(): DatabaseCommand
+  }
+  class PostgresCommand {
+    +execute(String sql): String
+  }
+  class PostgresConnection {
+    +open(): String
+  }
+  class PostgresDriverFactory {
+    +createConnection(): DatabaseConnection
+    +createCommand(): DatabaseCommand
+  }
+  class Repository {
+    +findOrders(): void
+  }
+}
+
+DatabaseCommand <|.. MySqlCommand
+DatabaseConnection <|.. MySqlConnection
+DatabaseDriverFactory <|.. MySqlDriverFactory
+DatabaseCommand <|.. PostgresCommand
+DatabaseConnection <|.. PostgresConnection
+DatabaseDriverFactory <|.. PostgresDriverFactory
+DatabaseCommand ..> MySqlCommand : crea
+DatabaseCommand ..> MySqlConnection : crea
+DatabaseCommand ..> PostgresCommand : crea
+DatabaseCommand ..> PostgresConnection : crea
+DatabaseConnection ..> MySqlCommand : crea
+DatabaseConnection ..> MySqlConnection : crea
+DatabaseConnection ..> PostgresCommand : crea
+DatabaseConnection ..> PostgresConnection : crea
+DatabaseDriverFactory ..> MySqlCommand : crea
+DatabaseDriverFactory ..> MySqlConnection : crea
+DatabaseDriverFactory ..> PostgresCommand : crea
+DatabaseDriverFactory ..> PostgresConnection : crea
+MySqlCommand ..> MySqlConnection : crea
+MySqlCommand ..> PostgresCommand : crea
+MySqlCommand ..> PostgresConnection : crea
+MySqlConnection ..> MySqlCommand : crea
+MySqlConnection ..> PostgresCommand : crea
+MySqlConnection ..> PostgresConnection : crea
+MySqlDriverFactory ..> MySqlCommand : crea
+MySqlDriverFactory ..> MySqlConnection : crea
+MySqlDriverFactory ..> PostgresCommand : crea
+MySqlDriverFactory ..> PostgresConnection : crea
+PostgresCommand ..> PostgresConnection : crea
+PostgresConnection ..> PostgresCommand : crea
+PostgresDriverFactory ..> PostgresCommand : crea
+PostgresDriverFactory ..> PostgresConnection : crea
+Main ..> MySqlCommand : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
+@enduml

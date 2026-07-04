@@ -1,0 +1,55 @@
+@startuml
+title Factory Method - Ejemplo 2 - solucion para transporte logistico
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  abstract class Logistics {
+  }
+  class RoadLogistics {
+  }
+  class SeaLogistics {
+  }
+  class Ship {
+    +deliver(String packageId): void
+  }
+  interface Transport <<interfaz>> {
+  }
+  class Truck {
+    +deliver(String packageId): void
+  }
+}
+
+Logistics <|-- RoadLogistics
+Logistics <|-- SeaLogistics
+Transport <|.. Ship
+Transport <|.. Truck
+Logistics ..> Truck : crea
+Logistics ..> Ship : crea
+RoadLogistics ..> Truck : crea
+RoadLogistics ..> Ship : crea
+SeaLogistics ..> Ship : crea
+Transport ..> Truck : crea
+Transport ..> Ship : crea
+Truck ..> Ship : crea
+Main ..> Logistics : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
+@enduml

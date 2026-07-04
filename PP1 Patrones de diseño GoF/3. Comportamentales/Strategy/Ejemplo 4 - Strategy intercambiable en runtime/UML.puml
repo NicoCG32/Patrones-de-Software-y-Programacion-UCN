@@ -1,0 +1,37 @@
+@startuml
+title Strategy - intercambio en runtime
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  class ImageEditor <<Context>>
+  interface FilterStrategy <<Strategy>>
+  class GrayscaleFilter
+  class ContrastFilter
+
+}
+
+FilterStrategy <|.. GrayscaleFilter
+FilterStrategy <|.. ContrastFilter
+ImageEditor --> FilterStrategy : delega algoritmo
+Main ..> ImageEditor : usa contexto
+
+
+note bottom of ImageEditor
+La estrategia puede cambiar sin modificar el contexto.
+end note
+@enduml

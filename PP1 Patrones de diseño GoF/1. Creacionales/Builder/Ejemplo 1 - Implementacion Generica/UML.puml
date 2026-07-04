@@ -1,0 +1,49 @@
+@startuml
+title Builder - Ejemplo 1 - Implementacion Generica
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  interface Builder <<interfaz>> {
+  }
+  class ConcreteBuilder {
+    +buildHeader(): void
+    +buildBody(): void
+    +buildFooter(): void
+    +result(): Product
+  }
+  class Director {
+    +construct(Builder builder): Product
+  }
+  class Product {
+    +setHeader(String header): void
+    +setBody(String body): void
+    +setFooter(String footer): void
+    +toString(): String
+  }
+}
+
+Builder <|.. ConcreteBuilder
+Builder ..> Product : crea
+ConcreteBuilder ..> Product : crea
+Main ..> ConcreteBuilder : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
+@enduml

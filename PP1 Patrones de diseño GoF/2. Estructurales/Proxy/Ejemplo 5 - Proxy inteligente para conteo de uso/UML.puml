@@ -1,0 +1,36 @@
+@startuml
+title Proxy inteligente - conteo de uso
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  interface SharedResource <<Subject>> {
++use(client: String): void
+  }
+  class ExpensiveResource <<RealSubject>>
+  class SmartReferenceProxy <<Proxy>>
+}
+
+SharedResource <|.. ExpensiveResource
+SharedResource <|.. SmartReferenceProxy
+SmartReferenceProxy --> ExpensiveResource : controla/delega
+Main ..> SharedResource : usa misma interfaz
+
+note bottom of SmartReferenceProxy
+Agrega administracion alrededor del acceso: conteo, trazas o control de ciclo de vida.
+end note
+@enduml

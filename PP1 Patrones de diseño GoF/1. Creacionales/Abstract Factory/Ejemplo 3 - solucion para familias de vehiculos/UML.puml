@@ -1,0 +1,94 @@
+@startuml
+title Abstract Factory - Ejemplo 3 - solucion para familias de vehiculos
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  interface Car <<interfaz>> {
+  }
+  class Catalog {
+    +showFamily(): void
+  }
+  class ElectricCar {
+    +specs(): String
+  }
+  class ElectricScooter {
+    +specs(): String
+  }
+  class ElectricVehicleFactory {
+    +createScooter(): Scooter
+    +createCar(): Car
+  }
+  class GasCar {
+    +specs(): String
+  }
+  class GasScooter {
+    +specs(): String
+  }
+  class GasVehicleFactory {
+    +createScooter(): Scooter
+    +createCar(): Car
+  }
+  interface Scooter <<interfaz>> {
+  }
+  interface VehicleFactory <<interfaz>> {
+  }
+}
+
+Car <|.. ElectricCar
+Scooter <|.. ElectricScooter
+VehicleFactory <|.. ElectricVehicleFactory
+Car <|.. GasCar
+Scooter <|.. GasScooter
+VehicleFactory <|.. GasVehicleFactory
+Car ..> GasScooter : crea
+Car ..> ElectricCar : crea
+Car ..> ElectricScooter : crea
+Car ..> GasCar : crea
+Catalog ..> GasScooter : crea
+Catalog ..> ElectricCar : crea
+Catalog ..> ElectricScooter : crea
+Catalog ..> GasCar : crea
+ElectricCar ..> GasScooter : crea
+ElectricCar ..> ElectricScooter : crea
+ElectricCar ..> GasCar : crea
+ElectricScooter ..> GasScooter : crea
+ElectricScooter ..> ElectricCar : crea
+ElectricScooter ..> GasCar : crea
+ElectricVehicleFactory ..> GasScooter : crea
+ElectricVehicleFactory ..> ElectricCar : crea
+ElectricVehicleFactory ..> ElectricScooter : crea
+ElectricVehicleFactory ..> GasCar : crea
+GasCar ..> GasScooter : crea
+GasScooter ..> GasCar : crea
+GasVehicleFactory ..> GasScooter : crea
+GasVehicleFactory ..> GasCar : crea
+Scooter ..> GasScooter : crea
+Scooter ..> ElectricCar : crea
+Scooter ..> ElectricScooter : crea
+Scooter ..> GasCar : crea
+VehicleFactory ..> GasScooter : crea
+VehicleFactory ..> ElectricCar : crea
+VehicleFactory ..> ElectricScooter : crea
+VehicleFactory ..> GasCar : crea
+Main ..> Catalog : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
+@enduml

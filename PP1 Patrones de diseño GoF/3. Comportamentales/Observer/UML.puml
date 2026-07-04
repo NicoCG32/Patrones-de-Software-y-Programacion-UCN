@@ -1,0 +1,24 @@
+@startuml
+title Observer - clases
+interface Observer { +update(newState: String) }
+class Subject {
+  -observers: List<Observer>
+  -state: String
+  +attach(observer)
+  +detach(observer)
+  +setState(state)
+}
+class ConsoleObserver
+Observer <|.. ConsoleObserver
+Subject o-- Observer : suscritos
+@enduml
+
+@startuml
+title Observer - interaccion
+participant Client
+participant Subject
+participant ConsoleObserver
+Client -> Subject : attach(observer)
+Client -> Subject : setState("actualizado")
+Subject -> ConsoleObserver : update("actualizado")
+@enduml

@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Solicitudes MVC Degradado,cl.ucn.solicitudes.controller,SolicitudController,78,0,0,0,15,0,6,0,6,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.view,JavaFxPlaceholderView,3,0,0,0,1,0,1,0,1,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.view,ConsoleView,34,0,0,0,10,0,2,0,2,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.view,SolicitudJavaFxView,252,0,0,0,57,0,3,0,3,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.application,EstudianteService,22,0,0,0,6,0,3,0,3,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.application,SolicitudService,23,60,1,1,5,18,4,2,3,2
+Solicitudes MVC Degradado,cl.ucn.solicitudes.application,EventoCambioEstadoSolicitud,12,15,0,0,4,6,4,1,4,1
+Solicitudes MVC Degradado,cl.ucn.solicitudes.domain.model,Estudiante,6,37,2,6,3,10,4,5,2,3
+Solicitudes MVC Degradado,cl.ucn.solicitudes.domain.model,Solicitud,20,74,3,11,7,22,8,9,5,5
+Solicitudes MVC Degradado,cl.ucn.solicitudes.domain.model,HistorialEvento,39,0,0,0,15,0,8,0,8,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.domain.model,EstadoSolicitud,0,37,1,3,0,6,1,3,0,2
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.jpa,EstudianteRepository,56,0,2,0,17,0,5,0,4,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.jpa,JpaUtil,10,0,0,0,5,0,3,0,3,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.jpa,SolicitudRepository,71,0,2,0,21,0,6,0,5,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.jpa,HistorialEventoRepository,34,0,0,0,12,0,3,0,3,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.messaging,HistorialEventosVerticle,45,0,0,0,13,0,3,0,3,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.messaging,VertxPublicadorEventosSolicitud,37,0,0,0,10,0,2,0,2,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes,Main,22,0,0,0,9,0,4,0,4,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes,Config,20,0,0,0,3,0,2,0,2,0
+Solicitudes MVC Degradado,cl.ucn.solicitudes.infra.external,ServicioCorreoExterno,14,0,0,0,5,0,2,0,2,0

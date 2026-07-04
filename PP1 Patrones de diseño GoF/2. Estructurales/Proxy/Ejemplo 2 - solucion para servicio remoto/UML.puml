@@ -1,0 +1,41 @@
+@startuml
+title Proxy - Ejemplo 2 - solucion para servicio remoto
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  ArrowColor #334155
+  FontColor #0F172A
+}
+hide empty members
+
+package "main" #EEF2FF {
+  class Main <<cliente>>
+}
+
+package "pattern" #ECFDF5 {
+  class CachingReportProxy {
+    +fetchReport(String id): String
+  }
+  class RemoteReportService {
+    +fetchReport(String id): String
+  }
+  interface ReportService <<interfaz>> {
+  }
+}
+
+ReportService <|.. CachingReportProxy
+ReportService <|.. RemoteReportService
+CachingReportProxy ..> RemoteReportService : crea
+ReportService ..> RemoteReportService : crea
+Main ..> CachingReportProxy : ejecuta
+
+note bottom
+La implementacion esta concentrada en src/pattern/PatternImplementation.java.
+Main solo instancia y ejecuta el caso de uso.
+end note
+@enduml
