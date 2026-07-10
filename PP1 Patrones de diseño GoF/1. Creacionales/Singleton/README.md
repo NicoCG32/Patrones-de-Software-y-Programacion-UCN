@@ -1,5 +1,7 @@
 # Singleton
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Garantizar una unica instancia y ofrecer un punto de acceso controlado.
@@ -45,21 +47,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para controlar una unica instancia compartida.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para controlar una unica instancia compartida.
 
 ### Ejemplo 2: Auditoria centralizada
 
-**Problematica:** los eventos deben registrarse en un flujo unico y ordenado.
-
-**Como la atiende el patron:** la instancia unica conserva la secuencia compartida.
+**Problematica:** los eventos deben registrarse en un flujo unico y ordenado. **Como la atiende el patron:** la instancia unica conserva la secuencia compartida.
 
 ### Ejemplo 3: Cache compartida
 
-**Problematica:** cargar metadatos repetidamente desperdicia recursos.
-
-**Como la atiende el patron:** el singleton centraliza una cache comun.
+**Problematica:** cargar metadatos repetidamente desperdicia recursos. **Como la atiende el patron:** el singleton centraliza una cache comun.
 
 ## Otras situaciones donde puede usarse
 

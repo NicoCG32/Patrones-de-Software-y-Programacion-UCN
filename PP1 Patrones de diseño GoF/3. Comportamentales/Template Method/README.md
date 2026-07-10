@@ -1,5 +1,7 @@
 # Template Method
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Definir el esqueleto de un algoritmo en una clase base y permitir que subclases redefinan pasos concretos.
@@ -46,21 +48,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para fijar un algoritmo y variar pasos especificos.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para fijar un algoritmo y variar pasos especificos.
 
 ### Ejemplo 2: Ciclo de pruebas
 
-**Problematica:** las pruebas comparten preparacion, ejecucion, verificacion y limpieza.
-
-**Como la atiende el patron:** la plantilla fija el ciclo y la subclase completa pasos concretos.
+**Problematica:** las pruebas comparten preparacion, ejecucion, verificacion y limpieza. **Como la atiende el patron:** la plantilla fija el ciclo y la subclase completa pasos concretos.
 
 ### Ejemplo 3: Procesamiento de pedidos
 
-**Problematica:** validar, cobrar, entregar y notificar debe ocurrir en orden.
-
-**Como la atiende el patron:** la plantilla conserva la secuencia obligatoria.
+**Problematica:** validar, cobrar, entregar y notificar debe ocurrir en orden. **Como la atiende el patron:** la plantilla conserva la secuencia obligatoria.
 
 ## Otras situaciones donde puede usarse
 

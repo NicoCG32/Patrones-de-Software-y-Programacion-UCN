@@ -1,5 +1,7 @@
 # Decorator
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Agregar responsabilidades a un objeto dinamicamente sin cambiar su interfaz.
@@ -49,21 +51,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para agregar responsabilidades mediante envoltorios.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para agregar responsabilidades mediante envoltorios.
 
 ### Ejemplo 2: Flujos de datos
 
-**Problematica:** un stream puede requerir buffer y cifrado en distintas combinaciones.
-
-**Como la atiende el patron:** cada decorador agrega una responsabilidad manteniendo la interfaz.
+**Problematica:** un stream puede requerir buffer y cifrado en distintas combinaciones. **Como la atiende el patron:** cada decorador agrega una responsabilidad manteniendo la interfaz.
 
 ### Ejemplo 3: Calculo de precios
 
-**Problematica:** impuestos y envio deben combinarse sin subclases por combinacion.
-
-**Como la atiende el patron:** cada regla envuelve el calculo anterior.
+**Problematica:** impuestos y envio deben combinarse sin subclases por combinacion. **Como la atiende el patron:** cada regla envuelve el calculo anterior.
 
 ## Otras situaciones donde puede usarse
 

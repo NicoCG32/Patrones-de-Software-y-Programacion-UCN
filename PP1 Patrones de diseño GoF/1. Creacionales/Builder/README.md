@@ -1,5 +1,7 @@
 # Builder
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Separar la construccion paso a paso de un objeto complejo de su representacion final.
@@ -48,21 +50,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para construir un objeto complejo mediante pasos ordenados.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para construir un objeto complejo mediante pasos ordenados.
 
 ### Ejemplo 2: Consultas SQL dinamicas
 
-**Problematica:** la consulta tiene partes opcionales y un orden valido.
-
-**Como la atiende el patron:** el builder encadena pasos semanticos y valida antes de construir.
+**Problematica:** la consulta tiene partes opcionales y un orden valido. **Como la atiende el patron:** el builder encadena pasos semanticos y valida antes de construir.
 
 ### Ejemplo 3: Datos de prueba
 
-**Problematica:** los tests requieren objetos validos con pequenas variaciones.
-
-**Como la atiende el patron:** el builder entrega valores por defecto y permite sobrescribir solo lo necesario.
+**Problematica:** los tests requieren objetos validos con pequenas variaciones. **Como la atiende el patron:** el builder entrega valores por defecto y permite sobrescribir solo lo necesario.
 
 ## Otras situaciones donde puede usarse
 

@@ -25,19 +25,21 @@ Patrones-de-Software-y-Programacion-UCN/
 │   ├── 2. Estructurales/
 │   └── 3. Comportamentales/
 ├── PP2 Patrones Arquitecturales y Testing/
-│   ├── Patrones de Arquitectura/
+│   ├── 1. Arquitecturas/
 │   │   ├── Basado en capas/
 │   │   ├── MVC/
 │   │   ├── Microservicios/
 │   │   ├── Pipe & Filters/
 │   │   └── Hexagonal/
-│   ├── ArchUnit/
-│   ├── JUnit4/
-│   └── ProgramacionReactiva/
+│   ├── 2. ArchUnit (Tests Arquitecturales)/
+│   ├── 3. JUnit4/
+│   │   └── JUnit5 (Tests Unitarios)/
+│   │       └── Mockito/
+│   └── 4. ProgramacionReactiva/
 └── README.md
 ```
 
-Cada carpeta principal contiene su propio `README.md` con explicaciones, ejemplos y referencias de estudio.
+Cada tema contiene un `README.md` operativo y un `EXPLICACIÓN.md` conceptual. El segundo desarrolla propósito, uso, contexto, ventajas, limitaciones, origen, evolución y estado actual.
 
 ## Material implementado
 
@@ -60,17 +62,16 @@ Cada patrón puede incluir:
 
 | Material | Contenido principal |
 | --- | --- |
-| [ArchUnit](<PP2 Patrones Arquitecturales y Testing/ArchUnit/README.md>) | Tests de arquitectura, reglas ejecutables sobre dependencias, paquetes, capas y convenciones. |
-| [JUnit4](<PP2 Patrones Arquitecturales y Testing/JUnit4/README.md>) | Tests unitarios, estructura AAA, aserciones, casos de error y reglas de negocio. |
-| [Mockito](<PP2 Patrones Arquitecturales y Testing/JUnit4/Mockito/README.md>) | Dobles de prueba, mocks, stubs, `verify`, `never` y `ArgumentCaptor`. |
-| [Programación Reactiva](<PP2 Patrones Arquitecturales y Testing/ProgramacionReactiva/README.md>) | Vert.x, Event Bus, point-to-point, publish-subscribe y request-response. |
-| [Formativa 2026-I](<PP2 Patrones Arquitecturales y Testing/Formativa 2026-I/README.md>) | Proyecto integrador con MVC degradado, refactorización arquitectural, JUnit, Mockito, ArchUnit, Vert.x y cobertura. |
-
-### Material histórico
-
-| Carpeta | Uso recomendado |
-| --- | --- |
-| [Intento Formativa2](<Intento Formativa2/README.md>) | Material exploratorio anterior. Conviene revisarlo como respaldo o comparación, no como índice principal del curso. |
+| [Arquitecturas](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/README.md>) | Ejemplos genéricos de arquitectura basada en capas, MVC, microservicios, Pipe & Filters y arquitectura hexagonal. |
+| [Basado en capas](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/Basado en capas/README.md>) | Separación entre presentación, aplicación, dominio e infraestructura. |
+| [MVC](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/MVC/README.md>) | Separación entre modelo, vista y controlador. |
+| [Microservicios](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/Microservicios/README.md>) | División de capacidades de negocio en servicios autónomos. |
+| [Pipe & Filters](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/Pipe & Filters/README.md>) | Procesamiento de datos mediante una cadena de filtros independientes. |
+| [Hexagonal](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/Hexagonal/README.md>) | Dominio protegido mediante puertos y adaptadores. |
+| [ArchUnit](<PP2 Patrones Arquitecturales y Testing/2. ArchUnit %28Tests Arquitecturales%29/README.md>) | Tests de arquitectura, reglas ejecutables sobre dependencias, paquetes, capas y convenciones. |
+| [JUnit4](<PP2 Patrones Arquitecturales y Testing/3. JUnit4/JUnit5 %28Tests Unitarios%29/README.md>) | Tests unitarios, estructura AAA, aserciones, casos de error y reglas de negocio. |
+| [Mockito](<PP2 Patrones Arquitecturales y Testing/3. JUnit4/JUnit5 %28Tests Unitarios%29/Mockito/README.md>) | Dobles de prueba, mocks, stubs, `verify`, `never` y `ArgumentCaptor`. |
+| [Programación Reactiva](<PP2 Patrones Arquitecturales y Testing/4. ProgramacionReactiva/README.md>) | Vert.x, Event Bus, point-to-point, publish-subscribe y request-response. |
 
 ## Temario del curso
 
@@ -93,8 +94,7 @@ Cada patrón puede incluir:
 2. Estudia cada patrón desde su problema: qué necesidad resuelve, qué clases introduce y qué dependencia evita o controla.
 3. Revisa los ejemplos implementados después de leer el README del patrón.
 4. Pasa a [PP2 Patrones Arquitecturales y Testing](<PP2 Patrones Arquitecturales y Testing/>) cuando ya tengas claridad sobre composición de clases.
-5. En PP2, estudia primero JUnit4, luego Mockito, después ArchUnit y finalmente Vert.x.
-6. Usa la [Formativa 2026-I](<PP2 Patrones Arquitecturales y Testing/Formativa 2026-I/README.md>) como caso integrador.
+5. En PP2, sigue el orden enumerado: [Arquitecturas](<PP2 Patrones Arquitecturales y Testing/1. Arquitecturas/README.md>), ArchUnit, JUnit4 con Mockito y Programación Reactiva.
 
 La idea no es memorizar nombres de patrones. Un patrón se entiende bien cuando puedes explicar el problema que resuelve, el costo que agrega y por qué esa estructura es mejor que una solución directa en ese contexto.
 

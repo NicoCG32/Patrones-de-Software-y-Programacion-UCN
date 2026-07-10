@@ -1,5 +1,7 @@
 # Adapter
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Convertir la interfaz de una clase existente en la interfaz que espera el cliente.
@@ -48,21 +50,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para traducir una interfaz incompatible.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para traducir una interfaz incompatible.
 
 ### Ejemplo 2: API externa incompatible
 
-**Problematica:** el proveedor entrega XML y el dominio espera objetos.
-
-**Como la atiende el patron:** el adaptador traduce el contrato externo al interno.
+**Problematica:** el proveedor entrega XML y el dominio espera objetos. **Como la atiende el patron:** el adaptador traduce el contrato externo al interno.
 
 ### Ejemplo 3: Biblioteca con unidades distintas
 
-**Problematica:** la biblioteca trabaja en millas y el dominio en kilometros.
-
-**Como la atiende el patron:** el adaptador concentra la conversion de unidades.
+**Problematica:** la biblioteca trabaja en millas y el dominio en kilometros. **Como la atiende el patron:** el adaptador concentra la conversion de unidades.
 
 ## Otras situaciones donde puede usarse
 

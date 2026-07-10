@@ -1,5 +1,7 @@
 # Visitor
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Agregar operaciones sobre una estructura de objetos sin modificar las clases de los elementos.
@@ -49,21 +51,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para aplicar operaciones sobre elementos sin modificarlos.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para aplicar operaciones sobre elementos sin modificarlos.
 
 ### Ejemplo 2: Analisis de arbol sintactico
 
-**Problematica:** un AST estable necesita operaciones nuevas.
-
-**Como la atiende el patron:** el visitor aplica operaciones sin modificar los nodos.
+**Problematica:** un AST estable necesita operaciones nuevas. **Como la atiende el patron:** el visitor aplica operaciones sin modificar los nodos.
 
 ### Ejemplo 3: Auditoria de items
 
-**Problematica:** items distintos requieren auditoria transversal.
-
-**Como la atiende el patron:** el visitor implementa la auditoria por tipo concreto.
+**Problematica:** items distintos requieren auditoria transversal. **Como la atiende el patron:** el visitor implementa la auditoria por tipo concreto.
 
 ## Otras situaciones donde puede usarse
 

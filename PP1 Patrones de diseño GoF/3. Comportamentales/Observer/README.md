@@ -1,5 +1,7 @@
 # Observer
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Notificar automaticamente a multiples observadores cuando cambia el estado de un sujeto.
@@ -47,21 +49,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para notificar cambios a observadores suscritos.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para notificar cambios a observadores suscritos.
 
 ### Ejemplo 2: Eventos de dominio
 
-**Problematica:** varios modulos reaccionan cuando se crea una orden.
-
-**Como la atiende el patron:** el publicador notifica a listeners desacoplados.
+**Problematica:** varios modulos reaccionan cuando se crea una orden. **Como la atiende el patron:** el publicador notifica a listeners desacoplados.
 
 ### Ejemplo 3: Tablero en tiempo real
 
-**Problematica:** graficos y contadores deben actualizarse con la metrica.
-
-**Como la atiende el patron:** el dashboard notifica a widgets observadores.
+**Problematica:** graficos y contadores deben actualizarse con la metrica. **Como la atiende el patron:** el dashboard notifica a widgets observadores.
 
 ## Otras situaciones donde puede usarse
 

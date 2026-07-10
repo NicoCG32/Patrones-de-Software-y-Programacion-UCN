@@ -1,5 +1,7 @@
 # Prototype
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Crear objetos copiando un prototipo existente en lugar de acoplar el cliente a clases concretas.
@@ -47,21 +49,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para crear objetos mediante copia de un prototipo.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para crear objetos mediante copia de un prototipo.
 
 ### Ejemplo 2: Configuraciones de consulta
 
-**Problematica:** una consulta base se reutiliza con filtros distintos.
-
-**Como la atiende el patron:** el prototipo se copia y se ajusta la variante.
+**Problematica:** una consulta base se reutiliza con filtros distintos. **Como la atiende el patron:** el prototipo se copia y se ajusta la variante.
 
 ### Ejemplo 3: Figuras graficas
 
-**Problematica:** duplicar una figura debe preservar estilo y cambiar posicion.
-
-**Como la atiende el patron:** cada figura produce su propia copia.
+**Problematica:** duplicar una figura debe preservar estilo y cambiar posicion. **Como la atiende el patron:** cada figura produce su propia copia.
 
 ## Otras situaciones donde puede usarse
 

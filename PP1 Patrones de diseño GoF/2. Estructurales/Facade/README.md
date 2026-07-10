@@ -1,5 +1,7 @@
 # Facade
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Proporcionar una interfaz simple para un subsistema complejo.
@@ -48,21 +50,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica para simplificar el acceso a un subsistema.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica para simplificar el acceso a un subsistema.
 
 ### Ejemplo 2: Arranque de aplicacion
 
-**Problematica:** iniciar exige coordinar configuracion, logs y base de datos.
-
-**Como la atiende el patron:** la fachada ofrece un metodo `start()` de alto nivel.
+**Problematica:** iniciar exige coordinar configuracion, logs y base de datos. **Como la atiende el patron:** la fachada ofrece un metodo `start()` de alto nivel.
 
 ### Ejemplo 3: Conversion multimedia
 
-**Problematica:** convertir video requiere decodificar, filtrar y exportar.
-
-**Como la atiende el patron:** la fachada coordina el subsistema multimedia.
+**Problematica:** convertir video requiere decodificar, filtrar y exportar. **Como la atiende el patron:** la fachada coordina el subsistema multimedia.
 
 ## Otras situaciones donde puede usarse
 

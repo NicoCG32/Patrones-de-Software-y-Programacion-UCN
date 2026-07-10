@@ -1,5 +1,7 @@
 # Strategy
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Encapsular una familia de algoritmos intercambiables detras de una interfaz comun.

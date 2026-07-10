@@ -1,5 +1,7 @@
 # Abstract Factory
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Crear familias de objetos relacionados sin que el cliente dependa de las clases concretas que instancia.
@@ -53,21 +55,15 @@ java -cp src Main
 
 ### Ejemplo 1: Implementacion Generica
 
-**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico.
-
-**Como la atiende el patron:** muestra la estructura basica de una fabrica abstracta que produce familias completas de objetos compatibles.
+**Problematica:** se necesita estudiar la estructura esencial del patron sin ruido accidental de un dominio especifico. **Como la atiende el patron:** muestra la estructura basica de una fabrica abstracta que produce familias completas de objetos compatibles.
 
 ### Ejemplo 2: Conectores de bases de datos
 
-**Problematica:** cada motor necesita conexion y comandos compatibles.
-
-**Como la atiende el patron:** una fabrica por motor crea una familia coherente de objetos de acceso a datos.
+**Problematica:** cada motor necesita conexion y comandos compatibles. **Como la atiende el patron:** una fabrica por motor crea una familia coherente de objetos de acceso a datos.
 
 ### Ejemplo 3: Familias de vehiculos
 
-**Problematica:** el catalogo debe crear vehiculos electricos o a gasolina sin conocer clases concretas.
-
-**Como la atiende el patron:** cada fabrica concreta crea la familia energetica completa.
+**Problematica:** el catalogo debe crear vehiculos electricos o a gasolina sin conocer clases concretas. **Como la atiende el patron:** cada fabrica concreta crea la familia energetica completa.
 
 ## Otras situaciones donde puede usarse
 

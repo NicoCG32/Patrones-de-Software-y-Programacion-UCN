@@ -1,5 +1,7 @@
 # Proxy
 
+Consulta la [explicación detallada](EXPLICACIÓN.md) para estudiar su propósito, uso, evolución, ventajas y limitaciones.
+
 ## Proposito
 
 Usar un sustituto con la misma interfaz que el objeto real para controlar su acceso, su costo, su seguridad, su ubicacion o su ciclo de vida.
