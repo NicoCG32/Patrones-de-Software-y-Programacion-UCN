@@ -1,6 +1,8 @@
 @startuml
 title Decorator - clases
-interface Message { +content(): String }
+interface Message {
+  +content(): String
+}
 class PlainMessage
 abstract class MessageDecorator {
   -wrapped: Message

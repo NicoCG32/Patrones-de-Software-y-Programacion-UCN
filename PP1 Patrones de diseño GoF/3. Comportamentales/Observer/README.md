@@ -18,7 +18,7 @@ El sujeto administra suscripciones y notifica a todos los observadores mediante 
 
 `Subject.setState()` actualiza el estado y llama a `notifyObservers()`. Cada `Observer` recibe `update(newState)`.
 
-El archivo `UML.puml` contiene dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
+El archivo `UML.puml` y los archivos de `fig/` contienen dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
 
 ## Palabras clave para reconocerlo
 
@@ -64,3 +64,14 @@ java -cp src Main
 - Modelo con multiples vistas.
 - Eventos de dominio.
 - Tableros en tiempo real.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

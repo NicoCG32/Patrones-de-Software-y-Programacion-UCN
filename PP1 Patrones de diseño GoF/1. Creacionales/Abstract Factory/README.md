@@ -18,7 +18,7 @@ El cliente depende de una fabrica abstracta. Cada fabrica concreta produce una f
 
 El `Client` recibe una `WidgetFactory`, invoca `createButton()` y `createCheckbox()`, y trabaja solo con las interfaces `Button` y `Checkbox`. La fabrica concreta decide si la familia sera clara u oscura.
 
-El archivo `UML.puml` contiene dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
+El archivo `UML.puml` y los archivos de `fig/` contienen dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
 
 ## Palabras clave para reconocerlo
 
@@ -70,3 +70,14 @@ java -cp src Main
 - Sistemas multi-marca donde cada marca exige componentes compatibles entre si.
 - Aplicaciones que deben intercambiar proveedores completos de servicios.
 - Motores de renderizado que crean familias coherentes de recursos.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

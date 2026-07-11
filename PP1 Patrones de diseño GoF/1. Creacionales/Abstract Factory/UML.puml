@@ -4,8 +4,12 @@ interface WidgetFactory {
   +createButton(): Button
   +createCheckbox(): Checkbox
 }
-interface Button { +render(): String }
-interface Checkbox { +render(): String }
+interface Button {
+  +render(): String
+}
+interface Checkbox {
+  +render(): String
+}
 class LightWidgetFactory
 class DarkWidgetFactory
 class LightButton

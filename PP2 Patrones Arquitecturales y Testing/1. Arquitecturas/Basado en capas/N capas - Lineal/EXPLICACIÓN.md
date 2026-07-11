@@ -63,3 +63,26 @@ El [README](README.md) y `src/Main.java` muestran una cadena lineal. Para analiz
 ## Relación con otras variantes
 
 La [explicación general de capas](../EXPLICACIÓN.md) ofrece el contexto histórico y conceptual. Las variantes de [dos capas](<../2 capas - Frontend Backend/EXPLICACIÓN.md>) y [tres capas](<../3 capas - Vista Servicio Persistencia/EXPLICACIÓN.md>) son casos concretos de esta generalización.
+
+
+## Diagramas
+
+Los siguientes diagramas complementan la explicación conceptual. Se muestran directamente aquí para comparar estructura estática, flujo de interacción y organización de componentes.
+
+### Diagrama de clases
+
+El diagrama de clases muestra las abstracciones principales, sus relaciones y la dirección de dependencia estática. El DSL PlantUML está en [fig/ClassDiagram.md](fig/ClassDiagram.md).
+
+![Diagrama de clases](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+El diagrama de secuencia muestra una ejecución típica de la arquitectura, enfatizando el orden de mensajes entre participantes. El DSL PlantUML está en [fig/SequenceDiagrama.md](fig/SequenceDiagrama.md).
+
+![Diagrama de secuencia](fig/SequenceDiagrama.png)
+
+### Diagrama de componentes
+
+El diagrama de componentes resume la colaboración estructural de mayor nivel. El DSL PlantUML está en [fig/ComponentDiagram.md](fig/ComponentDiagram.md).
+
+![Diagrama de componentes](fig/ComponentDiagram.png)

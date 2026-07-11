@@ -23,3 +23,14 @@ Material principal del patron.
 - Frameworks que delegan creacion en subclases.
 - Procesos con flujo comun y recursos variables.
 - Plugins que crean manejadores concretos.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

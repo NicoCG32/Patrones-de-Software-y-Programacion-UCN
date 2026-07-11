@@ -48,3 +48,14 @@ El proxy implementa la misma interfaz que el sujeto real. El cliente usa esa int
 ## Criterio academico
 
 La senal central es que el cliente cree estar usando el sujeto real porque ambos comparten interfaz, pero en realidad interactua con un intermediario que agrega una politica de acceso. Si el intermediario no conserva la misma interfaz, probablemente se trata de Adapter, Facade u otro patron estructural, no de Proxy.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

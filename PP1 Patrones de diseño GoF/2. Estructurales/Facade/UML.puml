@@ -1,9 +1,17 @@
 @startuml
 title Facade - clases
-class OrderFacade { +placeOrder(sku, account) }
-class Inventory { +hasStock(sku): boolean }
-class Payment { +charge(account) }
-class Shipping { +schedule(sku) }
+class OrderFacade {
+  +placeOrder(sku, account)
+}
+class Inventory {
+  +hasStock(sku): boolean
+}
+class Payment {
+  +charge(account)
+}
+class Shipping {
+  +schedule(sku)
+}
 class Client
 Client --> OrderFacade : usa API simple
 OrderFacade --> Inventory

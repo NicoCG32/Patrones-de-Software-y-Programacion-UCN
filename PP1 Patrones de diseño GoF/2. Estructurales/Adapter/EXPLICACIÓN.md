@@ -62,6 +62,29 @@ Adapter sigue siendo fundamental en integración. Las API REST, eventos y SDK no
 - **Proxy** conserva el contrato y controla el acceso.
 - **Bridge** separa dos dimensiones de variación diseñadas desde el inicio.
 
+
+## Diagramas
+
+Los siguientes diagramas complementan la explicación conceptual. Se muestran directamente aquí para comparar estructura estática, flujo de interacción y organización de componentes.
+
+### Diagrama de clases
+
+El diagrama de clases muestra las abstracciones principales, sus relaciones y la dirección de dependencia estática. El DSL PlantUML está en [fig/ClassDiagram.md](fig/ClassDiagram.md).
+
+![Diagrama de clases](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+El diagrama de secuencia muestra una ejecución típica del patrón de diseño, enfatizando el orden de mensajes entre participantes. El DSL PlantUML está en [fig/SequenceDiagrama.md](fig/SequenceDiagrama.md).
+
+![Diagrama de secuencia](fig/SequenceDiagrama.png)
+
+### Diagrama de componentes
+
+El diagrama de componentes resume la colaboración estructural de mayor nivel. El DSL PlantUML está en [fig/ComponentDiagram.md](fig/ComponentDiagram.md).
+
+![Diagrama de componentes](fig/ComponentDiagram.png)
+
 ## Material de esta carpeta
 
 El [README](README.md) y los ejemplos muestran adaptación de APIs y unidades. La revisión debe comprobar tanto la firma como la equivalencia semántica de cada conversión.

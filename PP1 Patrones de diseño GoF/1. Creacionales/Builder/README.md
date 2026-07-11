@@ -18,7 +18,7 @@ Un `Director` fija el algoritmo de construccion y un `Builder` concreta cada pas
 
 El `Director` invoca pasos sobre `ReportBuilder`. `ExecutiveReportBuilder` acumula estado en `Report` y devuelve el resultado al final.
 
-El archivo `UML.puml` contiene dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
+El archivo `UML.puml` y los archivos de `fig/` contienen dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
 
 ## Palabras clave para reconocerlo
 
@@ -75,3 +75,14 @@ Ademas de la version clasica con `Director`, este repositorio incluye tres ejemp
 - `Ejemplo 6 - Builder moderno sin Director para perfil de usuario`: construccion de un objeto de perfil con valores por defecto y metodos semanticos.
 
 Esta variante es adecuada cuando el orden de construccion no necesita extraerse como una receta independiente. El cliente usa una API fluida y el metodo `build()` concentra la validacion.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

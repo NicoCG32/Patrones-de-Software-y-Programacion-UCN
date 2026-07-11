@@ -73,6 +73,29 @@ Debe evitarse convertirlo en un contenedor de asignaciones sin reglas. La constr
 - **Prototype** parte de una instancia existente.
 - **Fluent Interface** describe el estilo de llamada encadenada, no necesariamente el patrón Builder.
 
+
+## Diagramas
+
+Los siguientes diagramas complementan la explicación conceptual. Se muestran directamente aquí para comparar estructura estática, flujo de interacción y organización de componentes.
+
+### Diagrama de clases
+
+El diagrama de clases muestra las abstracciones principales, sus relaciones y la dirección de dependencia estática. El DSL PlantUML está en [fig/ClassDiagram.md](fig/ClassDiagram.md).
+
+![Diagrama de clases](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+El diagrama de secuencia muestra una ejecución típica del patrón de diseño, enfatizando el orden de mensajes entre participantes. El DSL PlantUML está en [fig/SequenceDiagrama.md](fig/SequenceDiagrama.md).
+
+![Diagrama de secuencia](fig/SequenceDiagrama.png)
+
+### Diagrama de componentes
+
+El diagrama de componentes resume la colaboración estructural de mayor nivel. El DSL PlantUML está en [fig/ComponentDiagram.md](fig/ComponentDiagram.md).
+
+![Diagrama de componentes](fig/ComponentDiagram.png)
+
 ## Material de esta carpeta
 
 El [README](README.md) presenta la estructura y los ejemplos. Las implementaciones incluyen el Builder clásico y variantes modernas para consultas, configuración HTTP, órdenes de compra y perfiles.

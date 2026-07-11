@@ -69,6 +69,29 @@ Factory Method permanece vigente, aunque muchas implementaciones modernas son m�
 - **Strategy** reemplaza herencia por composición para variar comportamiento.
 - Una **Simple Factory** centraliza una selección, pero no constituye necesariamente el Factory Method GoF.
 
+
+## Diagramas
+
+Los siguientes diagramas complementan la explicación conceptual. Se muestran directamente aquí para comparar estructura estática, flujo de interacción y organización de componentes.
+
+### Diagrama de clases
+
+El diagrama de clases muestra las abstracciones principales, sus relaciones y la dirección de dependencia estática. El DSL PlantUML está en [fig/ClassDiagram.md](fig/ClassDiagram.md).
+
+![Diagrama de clases](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+El diagrama de secuencia muestra una ejecución típica del patrón de diseño, enfatizando el orden de mensajes entre participantes. El DSL PlantUML está en [fig/SequenceDiagrama.md](fig/SequenceDiagrama.md).
+
+![Diagrama de secuencia](fig/SequenceDiagrama.png)
+
+### Diagrama de componentes
+
+El diagrama de componentes resume la colaboración estructural de mayor nivel. El DSL PlantUML está en [fig/ComponentDiagram.md](fig/ComponentDiagram.md).
+
+![Diagrama de componentes](fig/ComponentDiagram.png)
+
 ## Material de esta carpeta
 
 El [README](README.md), el diagrama `UML.puml` y los ejemplos de transporte y diálogos permiten observar la separación entre el flujo estable y la creación variable.

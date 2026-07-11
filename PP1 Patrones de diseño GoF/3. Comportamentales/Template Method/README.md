@@ -18,7 +18,7 @@ La clase abstracta implementa el metodo plantilla y declara operaciones primitiv
 
 `DataImporter.importData()` ejecuta el orden fijo: abrir, parsear, validar, guardar y cerrar. `CsvImporter` implementa los pasos especificos.
 
-El archivo `UML.puml` contiene dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
+El archivo `UML.puml` y los archivos de `fig/` contienen dos vistas: un diagrama de clases, que muestra la estructura estatica, y un diagrama de secuencia, que muestra el flujo de mensajes entre objetos durante una ejecucion tipica.
 
 ## Palabras clave para reconocerlo
 
@@ -63,3 +63,14 @@ java -cp src Main
 - Procesos con orden obligatorio.
 - Importadores con parsing variable.
 - Frameworks con hooks.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

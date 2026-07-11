@@ -66,6 +66,29 @@ La adopción masiva impulsó contenedores, orquestación, service mesh y observa
 
 Los microservicios son una opción madura, no un destino obligatorio. La tendencia responsable es justificar cada frontera por autonomía, escalamiento o aislamiento reales. El tamaño debe seguir la cohesión del dominio y la capacidad del equipo para operar un sistema distribuido.
 
+
+## Diagramas
+
+Los siguientes diagramas complementan la explicación conceptual. Se muestran directamente aquí para comparar estructura estática, flujo de interacción y organización de componentes.
+
+### Diagrama de clases
+
+El diagrama de clases muestra las abstracciones principales, sus relaciones y la dirección de dependencia estática. El DSL PlantUML está en [fig/ClassDiagram.md](fig/ClassDiagram.md).
+
+![Diagrama de clases](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+El diagrama de secuencia muestra una ejecución típica de la arquitectura, enfatizando el orden de mensajes entre participantes. El DSL PlantUML está en [fig/SequenceDiagrama.md](fig/SequenceDiagrama.md).
+
+![Diagrama de secuencia](fig/SequenceDiagrama.png)
+
+### Diagrama de componentes
+
+El diagrama de componentes resume la colaboración estructural de mayor nivel. El DSL PlantUML está en [fig/ComponentDiagram.md](fig/ComponentDiagram.md).
+
+![Diagrama de componentes](fig/ComponentDiagram.png)
+
 ## Material de esta carpeta
 
 El [README](README.md) y `src/Main.java` modelan dos servicios y una comunicación simplificada. El ejemplo es conceptual: una implementación real requiere transporte, persistencia, seguridad y observabilidad.

@@ -1,8 +1,16 @@
 @startuml
 title Visitor - clases
-interface DocumentElement { +accept(visitor: Visitor) }
-class Paragraph { +accept(visitor) +text(): String }
-class Image { +accept(visitor) +path(): String }
+interface DocumentElement {
+  +accept(visitor: Visitor)
+}
+class Paragraph {
+  +accept(visitor)
+  +text(): String
+}
+class Image {
+  +accept(visitor)
+  +path(): String
+}
 interface Visitor {
   +visit(paragraph: Paragraph)
   +visit(image: Image)

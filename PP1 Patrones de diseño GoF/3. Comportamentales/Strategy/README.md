@@ -41,3 +41,14 @@ El contexto delega el algoritmo en una interfaz `Strategy`. Las estrategias conc
 ## Criterio academico
 
 La senal central es que el comportamiento variable es un algoritmo completo, no solo un dato. El contexto conserva la responsabilidad de coordinar el caso de uso, pero delega la parte variable en una abstraccion.
+
+
+## Diagramas UML
+
+### Diagrama de clases
+
+![Diagrama de clases UML](fig/ClassDiagram.png)
+
+### Diagrama de secuencia
+
+![Diagrama de secuencia UML](fig/SequenceDiagrama.png)

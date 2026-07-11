@@ -1,6 +1,8 @@
 @startuml
 title Proxy - clases
-interface Image { +display() }
+interface Image {
+  +display()
+}
 class HighResolutionImage
 class LazyImageProxy {
   -path: String

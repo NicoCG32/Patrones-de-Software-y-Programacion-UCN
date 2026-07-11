@@ -1,6 +1,8 @@
 @startuml
 title Prototype - clases
-interface Prototype<T> { +copy(): T }
+interface Prototype<T> {
+  +copy(): T
+}
 class QueryTemplate {
   -table: String
   -filter: String

@@ -7,7 +7,9 @@ interface ReportBuilder {
   +getResult(): Report
 }
 class ExecutiveReportBuilder
-class Director { +construct(builder): Report }
+class Director {
+  +construct(builder): Report
+}
 class Report
 ReportBuilder <|.. ExecutiveReportBuilder
 Director --> ReportBuilder : ordena pasos
